@@ -22,6 +22,7 @@ sdist/
 var/
 wheels/
 .idea/
+fitenv/
 pip-wheel-metadata/
 share/python-wheels/
 *.egg-info/
@@ -52,6 +53,7 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
+__pycache__/
 
 # Translations
 *.mo
