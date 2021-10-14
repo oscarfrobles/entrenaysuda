@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=edo#v%a+)e_gjkjjxqojk9tnw)*1l%9ebn_rle3vl5z+$e1_j'
+SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -123,11 +123,11 @@ WSGI_APPLICATION = 'fit.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'entrenamientos',
-        'USER': 'cibeles',
-        'PASSWORD': '123456',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT'),
     }
 }
 
@@ -211,8 +211,8 @@ CLIENT_ID = "426570479868-h9gncmdlrsgu3is3u8umjcf09h4l6mre.apps.googleuserconten
 APP_SECRET_KEY = "2-umuj-pyRoyQJn-9rGWLm_O"
 
 GOOGLEFIT_CONFIG = {
-    'CLIENT_ID': "426570479868-h9gncmdlrsgu3is3u8umjcf09h4l6mre.apps.googleusercontent.com",
-    'APP_SECRET_KEY': "2-umuj-pyRoyQJn-9rGWLm_O",
+    'CLIENT_ID': env('OAUTH_CLIENT_ID'),
+    'APP_SECRET_KEY': env('OAUTH_APP_SECRET_KEY'),
     'REDIRECT_URI': REDIRECT_URI,
     'access_token_uri': 'https://accounts.google.com/o/oauth2/token',
     'durationMillis': 86400000,
@@ -233,7 +233,7 @@ GOOGLEFIT_CONFIG = {
 
 
 sentry_sdk.init(
-    dsn="https://16d176ee83c64a0f903c7a413e4cc2b8@o1038060.ingest.sentry.io/6006251",
+    dsn=env('SENTRY_DSN'),
     integrations=[DjangoIntegration()],
 
     # Set traces_sample_rate to 1.0 to capture 100%
