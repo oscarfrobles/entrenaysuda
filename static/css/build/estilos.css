@@ -1,0 +1,76 @@
+@font-face {
+  font-family: inder;
+  src: url("{% static 'fonts/inder.ttf' %}") format("truetype");
+}
+@font-face {
+  font-family: alte_bold;
+  src: url("{% static 'fonts/AlteHaasGroteskBold.ttf' %}") format("truetype");
+}
+@font-face {
+  font-family: alte_light;
+  src: url("{% static 'fonts/fonts/AlteHaasGroteskRegular.ttf' %}") format("truetype");
+}
+header {
+  font-family: alte_bold;
+  font-size: 24px;
+  color: white;
+}
+
+body {
+  /* font-family:inder; */
+  font-size: 16px;
+  color: #4a4a4a;
+  font-family: Montserrat;
+  font-weight: 500;
+}
+
+.navbar {
+  margin-bottom: 0px;
+  border-radius: 15px;
+}
+
+.navbar-brand {
+  font-family: alte_bold;
+  font-size: 1.7em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.nav-link {
+  font-family: alte_light;
+  color: silver;
+  font-size: 0.9em;
+}
+
+footer {
+  font-family: alegreya-light;
+  font-size: 13px;
+  color: silver;
+}
+
+#titulo {
+  font-family: alegreya-light;
+  font-size: 18px;
+  margin-top: 47px;
+}
+
+.contenidos {
+  display: none;
+  margin: 20px;
+}
+.contenidos div.caja {
+  height: 250px;
+  border: 1px solid silver;
+  padding: 5px;
+  border-radius: 15px;
+  overflow: scroll;
+}
+.contenidos div.caja ul {
+  margin: 0px;
+  padding: 0px;
+}
+.contenidos div.caja ul li {
+  list-style-type: none;
+  font-size: xx-small;
+}
+
+/*# sourceMappingURL=estilos.css.map */

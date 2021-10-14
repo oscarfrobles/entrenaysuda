@@ -1,0 +1,87 @@
+ {% load static %}
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="{% static 'img/slide1.jpg' %}" alt="">
+                <div class="carousel-caption">
+                    <h3>Medidas</h3>
+                    {% block medidas_diff %}
+                        {% if user.is_authenticated %}
+                            {% if diff_medidas.peso %}
+                            <p>Diferencia de peso con anterior reglaje: <span class="dato"> {{ diff_medidas.peso }}</span> KG</p>
+                            {% endif %}
+                            {% if diff_medidas.imc %}
+                            <p>Diferencia de imc con anterior reglaje: <span class="dato"> {{ diff_medidas.imc }}</span></p>
+                            {% endif %}
+                            {% if diff_medidas.grasa %}
+                            <p>Diferencia de grasa corporal con anterior reglaje: <span class="dato"> {{ diff_medidas.grasa }}</span> %</p>
+                            {% endif %}
+                            {% if diff_medidas.musculo %}
+                            <p>Diferencia de músculo con anterior reglaje: <span class="dato"> {{ diff_medidas.musculo }} KG</span> %</p>
+                            {% endif %}
+                             {% if diff_medidas.gemelo %}
+                            <p>Diferencia de gemelos con anterior reglaje: <span class="dato"> {{ diff_medidas.gemelo }} KG</span> cm</p>
+                            {% endif %}
+                             {% if diff_medidas.cintura %}
+                            <p>Diferencia de cintura con anterior reglaje: <span class="dato"> {{ diff_medidas.cintura }} KG</span> cm</p>
+                            {% endif %}
+                             {% if diff_medidas.muslo %}
+                            <p>Diferencia de muslo con anterior reglaje: <span class="dato"> {{ diff_medidas.muslo }} KG</span> cm</p>
+                            {% endif %}
+                             {% if diff_medidas.pecho %}
+                            <p>Diferencia de pecho con anterior reglaje: <span class="dato"> {{ diff_medidas.pecho }} KG</span> cm</p>
+                            {% endif %}
+                             {% if diff_medidas.biceps %}
+                            <p>Diferencia de bíceps con anterior reglaje: <span class="dato"> {{ diff_medidas.biceps }} KG</span> cm</p>
+                            {% endif %}
+                        {% endif %}
+                    {% endblock %}
+                </div>
+            </div>
+
+            <div class="item">
+                <img src="{% static 'img/slide2.jpg' %}" alt="">
+                <div class="carousel-caption">
+                    <h3>Finalización de entrenamientos este mes</h3>
+                    {% block completados_mes %}
+                        {% if user.is_authenticated %}
+                            <p>COMPLETADOS: <span class="dato">{{ completados_mes }}</span></p>
+                            <p>NO COMPLETADOS: <span class="dato">{{ incompletados_mes }}</span></p>
+                        {% endif %}
+                    {% endblock %}
+                </div>
+            </div>
+
+            <div class="item">
+                <img src="{% static 'img/slide3.jpg' %}" alt="">
+                <div class="carousel-caption">
+                    <h3>Tipos de ejercicios</h3>
+                    {% block ejercicios_zona %}
+                        {% if user.is_authenticated %}
+                            <p>Tren Superior <span class="dato">{{ ejerc_zona_uno }}</span></p>
+                            <p>Tren Inferior <span class="dato">{{ ejerc_zona_dos }}</span></p>
+                            <p>Full Body <span class="dato">{{ ejerc_zona_tres }}</span></p>
+                        {% endif %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>

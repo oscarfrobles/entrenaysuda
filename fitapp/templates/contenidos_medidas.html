@@ -1,0 +1,28 @@
+{% load static %}
+<div class="contenidos medidas">
+    <div class="row">
+        <div class="col-md-12 col-xs-12 caja-entrenamiento offset-md-0">
+            {% block medidas_list %}
+            {% if user.is_authenticated %}
+
+            <div class="login_on"></div>
+            <h1>MEDIDAS</h1>
+            {% if medidas.mesAnterior %}
+                    Este mes aún no has registrado tus medidas.
+                    {% endif %}
+            {% for i in medidas.resultado %}
+            <div class="peso">{{ user.username|upper }}, {% if medidas.mesAnterior %}Anteriormente registraste{% else %}Este mes has registrado{% endif %} <br>un peso de <span class="dato">{{ i.peso }}</span> kg</div><br/>
+            <div class="imc">Tu IMC es <span class="dato">{{ i.imc }}</span>%</div><br/>
+            <div class="imc">Tu músculo es <span class="dato">{{ i.musculo }}</span> kg</div><br/>
+            <div class="imc">Tu grasa es <span class="dato">{{ i.grasa }}</span>%</div><br/>
+            <div class="imc">Cintura <span class="dato">{{ i.cintura }}</span>%</div><br/>
+            <div class="imc">Bíceps <span class="dato">{{ i.biceps }}</span>%</div><br/>
+            <div class="imc">Muslo <span class="dato">{{ i.muslo }}</span>%</div><br/>
+            <div class="imc">Gemelos <span class="dato">{{ i.gemelo }}</span>%</div><br/>
+            <div class="imc">Caliper <span class="dato">{{ i.caliper }}</span>%</div><br/>
+            {% endfor %}
+            {% endif %}
+            {% endblock %}
+        </div>
+    </div>
+</div>

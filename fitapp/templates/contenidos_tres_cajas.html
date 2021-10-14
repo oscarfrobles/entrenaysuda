@@ -1,0 +1,61 @@
+{% load static %}
+<div class="contenidos">
+    <div class="row">
+        <div class="col-md-4 col-xl-4 col-xs-12 caja offset-xl-0 mr-xl-0">
+            <div class="row">
+                <div class="col-2">
+                    <span class="number">01</span>
+                </div>
+                <div class="col-10">
+                    {% block medidas_list %}
+                    {% if user.is_authenticated %}
+
+                    <div class="login_on"><h5>Hola {{ user.username|upper }}!</h5><h4>{{ random_txt }}</h4></div>
+                    <br/>
+                    {% if medidas.mesAnterior %}
+                    Este mes aún no has registrado tus medidas.
+                    {% endif %}
+                    {% for i in medidas.resultado %}
+                    <div class="peso">{% if medidas.mesAnterior %}Anteriormente registraste{% else %}Este mes has registrado{% endif %} un peso de <span class="dato">{{ i.peso }}</span> kg</div>
+                    <br/>
+                    <div class="imc">Tu IMC es <span class="dato">{{ i.imc }}</span>%</div>
+                    <br/>
+                    <div class="medidas">Para ver el resto de medidas pulsa <a href="/medidas">aquí</a></div>
+                    {% endfor %}
+                    {% if medidas.mesAnterior %}
+                    <br/>
+                    <div class="medidas">Para ingresar las medidas de este mes pulsa  <button type="button" class="btn btn-primary medidas-btn" data-toggle="modal" data-target="#modalmedidas">
+                                medidas
+                            </button>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-xl-4 col-xs-12 caja offset-xl-0 mr-xl-0"><span class="number">02</span><h5>Próximos entrenos</h5>
+            {% block calendario_list %}
+            <ul>
+                {% for i in calendario %}
+                <li><span class="titulo"><a
+                        href="entrenamientos/{{ i.id }}">{{ i }}</a></span><br/>{{ i.fecha }}<br/> {% if i.completado == 0 %} <i class="fas fa-battery-empty"></i> NO REALIZADO {% elif i.completado == 1 %} <i class="fas fa-battery-full"></i> COMPLETO {% else %}<i class="fas fa-battery-half"></i> INCOMPLETO {% endif %}
+                </li>
+                {% endfor %}
+                {% endblock %}
+            </ul>
+        </div>
+        <div class="col-md-4 col-xl-4 col-xs-12 caja offset-xl-0 mr-xl-0"><span class="number">03</span><h5>Histórico</h5>
+            {% block historico_list %}
+            <ul>
+                {% for i in historico %}
+                <li><span class="titulo"><a
+                        href="historico/id/{{ i.id }}">{{ i }}</a></span><br/>{{ i.fecha }}<br/> {% if i.completado == 0 %} <i class="fas fa-battery-empty rojo"></i> NO REALIZADO {% elif i.completado == 1 %} <i class="fas fa-battery-full"></i> COMPLETO {% else %}<i class="fas fa-battery-half naranja"></i> INCOMPLETO {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+             {% endblock %}
+            <a href="historico/all/" class="btn btn-primary medidas-btn">LISTADO</a>
+        </div>
+    </div>
+</div>

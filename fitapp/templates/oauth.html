@@ -1,0 +1,11 @@
+{% load static %}
+<div class="contenidos">
+    <div class="row">
+        <div class="col-md-12 col-xs-12 caja-entrenamiento offset-md-0">
+           {% for k, i in llamada.items %}
+            {{ k }}: {{ i }}
+            {% endfor %}
+
+        </div>
+    </div>
+</div>

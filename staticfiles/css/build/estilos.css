@@ -1,0 +1,457 @@
+@font-face {
+  font-family: inder;
+  src: url("../../fonts/inder.ttf") format("truetype");
+}
+@font-face {
+  font-family: alte_bold;
+  src: url("../../fonts/AlteHaasGroteskBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: alte_light;
+  src: url("../../fonts/AlteHaasGroteskRegular.ttf") format("truetype");
+}
+@font-face {
+  font-family: Montserrat;
+  src: url("../../fonts/Montserrat-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: Montserrat-bold;
+  src: url("../../fonts/Montserrat-Bold.ttf") format("truetype");
+}
+header {
+  color: white;
+  font-family: alte_bold;
+  font-size: 24px;
+}
+
+body {
+  font-size: 14px;
+  color: #4a4a4a;
+  font-family: Montserrat;
+  font-weight: 500;
+}
+
+h1 {
+  font-size: 1em;
+}
+
+.comentario {
+  width: 100px;
+  height: 90px;
+}
+
+.modal-dialog {
+  padding-top: 50% !important;
+}
+
+.navbar {
+  margin-bottom: 0px;
+  border-radius: 0px;
+}
+
+.contenidos {
+  display: none;
+  margin: 0px;
+}
+.contenidos li {
+  list-style-type: none;
+  margin-bottom: 15px;
+}
+.contenidos div.caja-entrenamiento {
+  height: auto;
+  min-height: 338px;
+  padding-right: 30px;
+  background-color: #4a4a4a;
+  background-image: url(../../img/dumbbells.png);
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  color: white;
+  text-align: right;
+}
+.contenidos div.caja-entrenamiento .number {
+  float: left;
+  width: 50px;
+  height: 50px;
+  padding: 5px;
+  margin-left: 20px;
+  background-color: #4a4a4a;
+  border-radius: 50%;
+  color: white;
+  text-align: left;
+  font-size: 1.8em;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+}
+.contenidos div.caja-entrenamiento .dato {
+  color: #337ab7;
+}
+.contenidos div.caja {
+  height: auto;
+  min-height: 70px;
+  padding: 5px;
+  padding-right: 30px;
+  margin-bottom: 20px;
+  background-color: white;
+  border: 0px;
+  border-radius: 0px;
+  color: #4a4a4a;
+  text-align: right;
+}
+.contenidos div.caja .number {
+  float: left;
+  width: 50px;
+  height: 50px;
+  padding: 5px;
+  margin-left: 20px;
+  background-color: #4a4a4a;
+  border-radius: 50%;
+  color: white;
+  text-align: left;
+  font-size: 1.8em;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+}
+.contenidos div.caja h5 {
+  font-size: 25px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+.contenidos div.caja:nth-of-type(2n+1) {
+  background-color: #4a4a4a;
+  background-image: url(../../img/chica_boxeo.png);
+  background-position: right top;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  color: white;
+}
+.contenidos div.caja:nth-of-type(2n+1) .number {
+  background-color: white;
+  color: #4a4a4a;
+}
+.contenidos div.caja:nth-of-type(2n+1) .titulo a {
+  color: bisque;
+}
+.contenidos div.caja:nth-of-type(3) {
+  min-height: 224px;
+  background-image: url(../../img/dumbbells.png) !important;
+}
+
+.dato {
+  margin-right: 10px;
+  margin-left: 10px;
+  color: white;
+  font-size: 1.8em;
+}
+
+.medidas div.caja {
+  height: auto;
+  min-height: 70px;
+  padding: 5px;
+  padding-right: 30px;
+  margin-bottom: 20px;
+  background-color: white;
+  background-image: url(../../img/dumbbells.png) !important;
+  background-size: auto 100%;
+  border: 0px;
+  border-radius: 0px;
+  color: #4a4a4a;
+  text-align: right;
+}
+.medidas div.caja .number {
+  float: left;
+  width: 50px;
+  height: 50px;
+  padding: 5px;
+  margin-left: 20px;
+  background-color: #4a4a4a;
+  border-radius: 50%;
+  color: white;
+  text-align: left;
+  font-size: 1.8em;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+}
+
+.items {
+  color: #4a4a4a;
+  background-color: white;
+  border-radius: 6%;
+  -moz-border-radius: 21px;
+  -webkit-border-radius: 21px;
+  font-size: 0.9em;
+  min-height: 100px;
+}
+.items .finalizar {
+  text-align: left;
+  padding: 20px;
+  height: 95%;
+  color: white;
+  background-color: #4a4a4a;
+  border-radius: 6%;
+  -moz-border-radius: 21px;
+  -webkit-border-radius: 21px;
+  margin-top: 10px;
+}
+.items .entrenamiento-cab {
+  background-color: #337ab7;
+  text-align: left;
+  padding: 20px;
+  height: 88%;
+  color: white;
+  border-radius: 6%;
+  -moz-border-radius: 21px;
+  -webkit-border-radius: 21px;
+  margin-top: 10px;
+}
+
+.label_actualizado {
+  display: none;
+}
+
+.comentario {
+  color: #337ab7;
+}
+
+.naranja {
+  color: orange;
+}
+
+.rojo {
+  color: red;
+}
+
+.pagination a {
+  color: orange;
+}
+
+.contenidos div.caja-entrenamiento .pagination {
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+
+  .navbar {
+    margin-bottom: 0px;
+    border-radius: 0px;
+  }
+
+  .navbar-nav {
+    display: inherit;
+  }
+  .navbar-nav .nav-item {
+    padding-right: 10px;
+  }
+
+  .modal-dialog {
+    padding-top: 50% !important;
+  }
+
+  .contenidos {
+    display: none;
+    margin: 0px;
+  }
+  .contenidos div.caja {
+    height: auto;
+    min-height: 338px;
+    padding: 5px;
+    padding-right: 30px;
+    margin-bottom: 20px;
+    background-color: white;
+    border: 0px;
+    border-radius: 0px;
+    color: #4a4a4a;
+    text-align: right;
+  }
+  .contenidos .number {
+    display: block;
+    width: 50px;
+    height: 50px;
+    padding: 5px;
+    margin-top: 20px;
+    margin-left: 20px;
+    background-color: #4a4a4a;
+    border-radius: 50%;
+    color: white;
+    text-align: left;
+    font-size: 1.8em;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+  }
+  .contenidos div.caja:nth-of-type(2n+1) {
+    background-color: #4a4a4a;
+    background-image: url(../../img/chica_boxeo.png);
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    color: white;
+  }
+  .contenidos div.caja:nth-of-type(2n+1) .titulo a {
+    color: bisque;
+  }
+  .contenidos div.caja:nth-of-type(2n+1) .number {
+    background-color: white;
+    color: #4a4a4a;
+  }
+  .contenidos div.caja:nth-of-type(3) {
+    min-height: 224px;
+    background-image: url(../../img/dumbbells.png) !important;
+  }
+  .contenidos div.caja-entrenamiento {
+    height: auto;
+    min-height: 710px;
+    padding-right: 30px;
+    background-color: #4a4a4a;
+    background-image: url(../../img/dumbbells.png);
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    color: white;
+    text-align: right;
+  }
+  .contenidos div.caja-entrenamiento .number {
+    background-color: white;
+    color: #4a4a4a;
+  }
+  .contenidos div.caja-entrenamiento .items {
+    color: #4a4a4a;
+    background-color: white;
+    border-radius: 6%;
+    -moz-border-radius: 21px;
+    -webkit-border-radius: 21px;
+    font-size: 0.9em;
+    min-height: 100px;
+  }
+  .contenidos div.caja-entrenamiento .items .finalizar {
+    text-align: left;
+    padding: 20px;
+    height: 88%;
+    color: white;
+    background-color: #4a4a4a;
+    border-radius: 6%;
+    -moz-border-radius: 21px;
+    -webkit-border-radius: 21px;
+    margin-top: 10px;
+  }
+  .contenidos div.caja-entrenamiento .items .entrenamiento-cab {
+    background-color: #337ab7;
+    text-align: left;
+    padding: 20px;
+    height: 88%;
+    color: white;
+    border-radius: 6%;
+    -moz-border-radius: 21px;
+    -webkit-border-radius: 21px;
+    margin-top: 10px;
+  }
+  .contenidos div.caja-entrenamiento .dato {
+    color: #337ab7;
+  }
+  .contenidos div.caja-entrenamiento .comentario {
+    width: 250px;
+  }
+
+  .dato {
+    margin-right: 10px;
+    margin-left: 10px;
+    color: white;
+    font-size: 1.9em;
+  }
+
+  .medidas div.caja {
+    height: auto;
+    min-height: 70px;
+    padding: 5px;
+    padding-right: 30px;
+    margin-bottom: 20px;
+    background-color: white;
+    background-image: url(../../img/dumbbells.png) !important;
+    background-size: auto 100%;
+    border: 0px;
+    border-radius: 0px;
+    color: #4a4a4a;
+    text-align: right;
+  }
+  .medidas div.caja .number {
+    float: left;
+    width: 50px;
+    height: 50px;
+    padding: 5px;
+    margin-left: 20px;
+    background-color: #4a4a4a;
+    border-radius: 50%;
+    color: white;
+    text-align: left;
+    font-size: 1.8em;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+  }
+}
+@media (min-width: 1200px) {
+  .items {
+    padding: 20px;
+  }
+
+  .navbar {
+    margin-bottom: 0px;
+    border-radius: 15px;
+  }
+
+  .navbar-brand {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    font-family: Montserrat-bold;
+    font-size: 1.7em;
+  }
+
+  .nav-link {
+    color: silver;
+    font-family: alte_light;
+    font-size: 0.9em;
+  }
+
+  #titulo {
+    margin-top: 47px;
+    font-family: alegreya-light;
+    font-size: 18px;
+  }
+
+  h5 {
+    text-transform: uppercase;
+    font-family: Montserrat-bold;
+  }
+
+  .modal-dialog {
+    padding-top: 20% !important;
+    margin: auto !important;
+  }
+
+  .modal-content {
+    min-height: 100px;
+    padding: 20px;
+  }
+
+  .modal-body {
+    position: relative;
+    padding: 0px;
+  }
+
+  .close {
+    position: absolute;
+    top: 0;
+    right: -30px;
+    z-index: 999;
+    opacity: 1;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: normal;
+  }
+
+  .contenidos div.caja-entrenamiento {
+    height: auto;
+    min-height: 738px !important;
+  }
+}
+
+/*# sourceMappingURL=estilos.css.map */

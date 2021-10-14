@@ -1,0 +1,87 @@
+{% load static %}
+{% load tags_extras %}
+<div class="contenidos container-fluid entrenamientos" xmlns="http://www.w3.org/1999/html">
+    <div class="row ml-md-15">
+        <div class="col-md-12 col-xs-12 caja-entrenamiento">
+            {% block entrenamientos_list %}
+            {% if user.is_authenticated %}
+
+            <div class="login_on"></div>
+            <br/>
+            <div class="container-fluid">
+                <div class="ejercicios row">
+                    <div class="items col-md-10 col-12 offset-md-1 pb-3 pr-md-10 mb-3 mb-md-5">
+                        <div class="container-fluid entrenamiento-cab">
+                            <div class="ejercicios row">
+                                <div class="col-12">
+                                    <h1> Entrenamiento de {{ entrenamientos|get_fechaEntrenamiento }} para [{{ user }}]</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ejercicios row">
+                    {% for i in entrenamientos %}
+                    {% if forloop.counter|divisibleby:"2" %}
+                    <div class="col-md-5 mb-md-5 mb-3  mr-md-0 offset-md-0 col-12 items">
+                        {% else %}
+                        <div class="col-md-5 mb-3 mb-md-5 mr-md-3 offset-md-1 col-12 items">
+                            {% endif %}
+
+                            <span>{{ i.ejercicios__nombre }}</span> Series: <span class="dato">{{ i.series }}</span><br>
+                            {% if i.ejercicios__indicaciones %}
+                             <button type="button" class="btn btn-primary indicaciones-btn" data-toggle="modal"
+                                    data-src="{{ i.ejercicios__indicaciones }}" data-target="#modalindicaciones">
+                                Indicaciones
+                            </button>
+                            {% endif %}
+                            {% if i.ejercicios__url %}
+                            <button type="button" class="btn btn-primary video-btn" data-toggle="modal"
+                                    data-src="{{ i.ejercicios__url }}" data-target="#modalvideo">
+                                Vídeo
+                            </button>
+                            {% endif %}
+                            <br>
+                            {% if i.ejercicios__tiempo %}
+                            Tiempo: <span class="dato">{{ i.ejercicios__tiempo }}''</span>
+                            {% endif %}
+                            {% if i.ejercicios__reps %}
+                            Repeticiones: <span class="dato">{{ i.ejercicios__reps }}</span>
+                            {% endif %}
+
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+                 <div class="row">
+                        <div class="items col-md-10 col-12 offset-md-1 pr-md-10 mb-5 pb-3">
+                            <div class="container-fluid finalizar">
+                                <div class="row mb-3  mb-5">
+                                    <div class="col-6">{{ user.username|upper }} Quieres marcar como completado el
+                                        entrenamiento? {% csrf_token %} {{ respuesta }}
+                                    </div>
+                                    <div class="col-6">
+                                        Completado: <input name="btn-completado" {% if entrenamientos|get_completadoEntrenamiento == 1 %} checked {% endif %}  class="btn-completado" type="radio" value="1"> &nbsp; &nbsp;
+                                        SemiCompletado: <input name="btn-completado" {% if entrenamientos|get_completadoEntrenamiento == 2 %} checked {% endif %} class="btn-completado" type="radio" value="2">
+                                        <br><span class="label_actualizado">Actualizado</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">Quieres dejar algún comentario sobre el entrenamiento?</div>
+                                    <div class="col-6"><textarea data-toggle="tooltip" data-placement="top" title="Pulsa enter para guardar" class="comentario" cols="auto" rows="auto">{{ entrenamientos|get_comentarioEntrenamiento }}</textarea></div>
+                                </div>
+                                <div class="row pt-5">
+                                    <div class="col-12"><button type="button" class="btn btn-primary googlefit-btn" data-toggle="modal"  data-target="#modalgeneral">Recoger los datos de GOOGLE</button></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            {% endif %}
+
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
