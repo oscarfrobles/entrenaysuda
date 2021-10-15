@@ -1,19 +1,19 @@
-name: Deploy
-
 on:
   push:
-    branches:
-      - dev # Changing the branch here would also work
-
+    branches: [ dev ]
+  pull_request:
+    branches: [ dev ]
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "trainandsweat"
-          heroku_email: "oskijob@gmail.com"
-          justlogin: true
-      - run: heroku auth:whoami
+  heroku_git_deploy_job:
+      runs-on: ubuntu-latest
+      name: Git Deploy job- A job to deploy django app to heroku using git
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+        - name: Deploy django to heroku
+          uses: nyakaz73/heroku-django-deploy@v0.68 
+          with: 
+            heroku_app_name : ${{ secrets.HEROKU_APP_NAME }}
+            heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+            heroku_email_address: 'oskijob@gmail.com'
+            use_git: true
