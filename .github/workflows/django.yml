@@ -9,7 +9,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-lastest
     strategy:
       max-parallel: 4
       matrix:
@@ -28,4 +28,3 @@ jobs:
     - name: Run Tests
       run: |
         python manage.py test
-        git push heroku main
