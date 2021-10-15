@@ -7,4 +7,4 @@ jobs:
   heroku_git_deploy_job:
       runs-on: ubuntu-latest
       steps:
-      - run: git --version
+      - run: git fetch && git branch
