@@ -1,4 +1,6 @@
 name: DEPLOY MASTER
+
+on:
   push:
     branches: [ master ]
   pull_request:
