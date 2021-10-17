@@ -27,14 +27,14 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       env:
-        SENTRY_DSN='https://16d176ee83c64a0f903c7a413e4cc2b8@o1038060.ingest.sentry.io/6006251'
-        OAUTH_CLIENT_ID='426570479868-h9gncmdlrsgu3is3u8umjcf09h4l6mre.apps.googleusercontent.com'
-        OAUTH_APP_SECRET_KEY='2-umuj-pyRoyQJn-9rGWLm_O'
-        DB_USER=cibeles
-        DB_PASSWORD=123456
-        DB_HOST=localhost
-        DB_NAME=entrenamientos
-        DB_PORT=5432
-        DJANGO_SECRET_KEY='django-insecure-=edo#v%a+)e_gjkjjxqojk9tnw)*1l%9ebn_rle3vl5z+$e1_j'
+        SENTRY_DSN: 'https://16d176ee83c64a0f903c7a413e4cc2b8@o1038060.ingest.sentry.io/6006251'
+        OAUTH_CLIENT_ID: '426570479868-h9gncmdlrsgu3is3u8umjcf09h4l6mre.apps.googleusercontent.com'
+        OAUTH_APP_SECRET_KEY: '2-umuj-pyRoyQJn-9rGWLm_O'
+        DB_USER: cibeles
+        DB_PASSWORD: 123456
+        DB_HOST: localhost
+        DB_NAME: entrenamientos
+        DB_PORT: 5432
+        DJANGO_SECRET_KEY: 'django-insecure-=edo#v%a+)e_gjkjjxqojk9tnw)*1l%9ebn_rle3vl5z+$e1_j'
       run: |
         python manage.py test
