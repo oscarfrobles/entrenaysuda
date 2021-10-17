@@ -11,7 +11,7 @@ class MedidaAdmin(admin.ModelAdmin):
     list_display = ('user','anyo','mes', 'peso', 'imc')
 
 class CalendarioAdmin(admin.ModelAdmin):
-    list_display = ('user', 'fecha', 'activo','completado', 'get_ejercicios')
+    list_display = ('user', 'fecha', 'activo','completado', 'get_ejercicios', 'calories', 'distance')
     save_as = True
 
     def get_ejercicios(self, obj):

@@ -162,8 +162,10 @@ def get_calendario(request, **kwargs):
     if 'id_calendario' in kwargs:
         cal = Calendario.objects.values('comentario', 'fecha', 'completado', 'ejercicios__nombre',
                                         'ejercicios__indicaciones', 'ejercicios__url', 'ejercicios__tiempo',
-                                        'ejercicios__reps', 'series').filter(id=kwargs['id_calendario']).filter(
-            **filters).order_by(order)
+                                        'ejercicios__reps', 'series','calories','steps','estimated_steps','distance',
+                                        'heart','bpm','weight','session_google', 'session_google__name', 'session_google__description',
+                                        'session_google__duration','session_google__name','session_google__activityType')\
+            .filter(id=kwargs['id_calendario']).filter(**filters).order_by(order)
     else:
         if 'numero' in kwargs:
             cal = Calendario.objects.all().filter(**filters).filter(user_id=request.user.id).order_by(order)[:kwargs['numero']]
