@@ -61,26 +61,6 @@ class Ejercicio(models.Model):
     class Meta:
         ordering = ['orden']
 
-
-# class Entrenamiento(models.Model):
-#     nombre = models.CharField(max_length=120, default='')
-#     ejercicios = models.ManyToManyField(Ejercicio)
-#     series = models.IntegerField(
-#         choices=Series.choices,
-#         default=Series.UNO,
-#     )
-#     class Meta:
-#         ordering = ['ejercicios__orden']
-#
-#     def __str__(self):
-#         return self.nombre
-#     def get_ejercicios(self):
-#         return ",".join([str(e) for e in self.ejercicios.all()])
-#     class Meta:
-#         ordering = ['id']
-
-
-
 class Medida(models.Model):
     MONTH_CHOICES = ((1, "Enero"), (2, "Febrero"), (3, "Marzo"),(4, "Abril"),(5, "Mayo"),(6, "Junio"),(7, "Julio"),(8, "Agosto"),(9, "Septiembre"),(10, "Octubre"),(11, "Noviembre"),(12, "Diciembre"),)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default='1')

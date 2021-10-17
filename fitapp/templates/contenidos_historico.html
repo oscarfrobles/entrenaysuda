@@ -74,11 +74,62 @@
                                         {% endif %}
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row mb-3  mb-5">
                                     <div class="col-6">COMENTARIO:</div>
-                                    <div class="col-6">{{ historico|get_comentarioEntrenamiento }}
-                                    </div>
+                                    <div class="col-6">{{ historico|get_comentarioEntrenamiento }}</div>
                                 </div>
+
+                                    {% if historico|get_Calories %}
+                                    <div class="row">
+                                        <div class="col-12">Calorías:  {{ historico|get_Calories }}</div>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if historico|get_Steps %}
+                                    <div class="row">
+                                        <div class="col-12">Pasos: {{ historico|get_Steps }}</div>
+                                    </div>
+                                    {% endif %}
+
+                                     {% if historico|get_EstimatedSteps %}
+                                    <div class="row">
+                                        <div class="col-12">Pasos estimados: {{ historico|get_EstimatedSteps }}</div>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if historico|get_Distance %}
+                                    <div class="row">
+                                        <div class="col-12">Distancia: {{ historico|get_Distance }}</div>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if historico|get_Heart %}
+                                    <div class="row">
+                                        <div class="col-12">Corazón: {{ historico|get_Heart }}</div>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if historico|get_Bpm %}
+                                    <div class="row">
+                                        <div class="col-12">Pulsaciones: {{ historico|get_Bpm }}</div>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if historico|get_Weight %}
+                                    <div class="row">
+                                        <div class="col-12">Peso: {{ historico|get_Weight }}</div>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if historico|get_Sesiones %}
+                                    {% for i in historico %}
+                                    <div class="row">
+                                        <div class="col-12">Peso: {{ i.session_google__name }}</div>
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+
+
                             </div>
                         </div>
                     </div>

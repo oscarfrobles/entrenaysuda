@@ -4,7 +4,6 @@ from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
-
 from fit.settings import STATIC_URL, URL_BASE
 from .apigoogle.oauth import Oauth
 from .models import Calendario
@@ -151,9 +150,7 @@ def entrenamiento_completado(request, **kwargs):
 
 def historico(request, **kwargs):
     template = loader.get_template('historico.html')
-    context = {}
     calendario_id = kwargs['calendario_id']
-    param = kwargs['param1']
     if request.method == "GET":
         if request.user.is_authenticated:
             username = request.user.id
