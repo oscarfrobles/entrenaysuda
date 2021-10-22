@@ -139,7 +139,6 @@ dmypy.json
 .ebextensions/*
 /requirements.txtBACK
 *.pyc
-/staticfiles/js/PickMeUp-master/
 /.ebextensions/
 /.elasticbeanstalk/
 /.idea/
