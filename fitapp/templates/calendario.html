@@ -20,8 +20,8 @@
     {% block style %}
     <link type="text/css" href="{% static 'css/build/estilos.css' %}?{% now 'U' %}">
         <link type="text/css" type="text/css" href="{% static "fontawesome/css/all.min.css" %}" />
-     <link type="text/css" href="{% static 'css/build/pickmeup.css' %}">
-     <link type="text/css" href="{% static 'css/build/pickmeup-overwrite.css' %}">
+     <link type="text/css" href="{% static 'css/build/pickmeup.css' %}?{% now 'U' %}">
+     <link type="text/css" href="{% static 'css/build/pickmeup-overwrite.css' ?{% now 'U' %}%}">
     {% endblock %}
     <script src="{% static 'js/login.js' %}"></script>
     <script language="JavaScript">
