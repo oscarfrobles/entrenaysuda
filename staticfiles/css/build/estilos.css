@@ -44,6 +44,10 @@ h1 {
   padding-top: 50% !important;
 }
 
+.modal-body div {
+  margin-bottom: 10px;
+}
+
 .navbar {
   margin-bottom: 0px;
   border-radius: 0px;

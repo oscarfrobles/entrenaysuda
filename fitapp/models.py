@@ -114,7 +114,6 @@ class SesionesGoogle(models.Model):
 class Calendario(models.Model):
     fecha = models.DateField(("Fecha"), default=date.today)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default='1')
-    #entrenamiento = models.ForeignKey(Entrenamiento, on_delete=models.DO_NOTHING, blank=True, null=True, related_name='entrenamientos')
     ejercicios = models.ManyToManyField(Ejercicio)
     series = models.IntegerField(
                  choices=Series.choices,
