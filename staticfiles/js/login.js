@@ -1,6 +1,7 @@
 
-$(document).ready(function(){ console.log(window.location);
+$(document).ready(function(){
     $("#login").click(function(){
+        jQuery.noConflict();
         $("#myModal").modal();
     });
     $("#logout").click(function(){

@@ -1,12 +1,14 @@
+from django.conf.urls import url
 from django.urls import path, re_path
-
 from . import views
+
 
 def trigger_error(request):
     division_by_zero = 1 / 0
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('calendario/', views.calendar_view, name='calendario'),
     path('medidas/', views.medidas, name='medidas'),
     #path('entrenamientos/(?P<id>.*)$', views.entrenamientos, name='entrenamientos'),
     path('entrenamientos/<int:calendario_id>/', views.entrenamientos, name="entrenamientos"),

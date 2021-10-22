@@ -207,6 +207,19 @@ HOSTNAME = socket.gethostname()
 if HOSTNAME == 'CIBELES-1':
     URL_BASE = 'http://127.0.0.1:8000'
     REDIRECT_URI = 'http://127.0.0.1:8000/oauth/login/'
+    sentry_sdk.init(
+        dsn=env('SENTRY_DSN'),
+        integrations=[DjangoIntegration()],
+
+        # Set traces_sample_rate to 1.0 to capture 100%
+        # of transactions for performance monitoring.
+        # We recommend adjusting this value in production.
+        traces_sample_rate=1.0,
+
+        # If you wish to associate users to errors (assuming you are using
+        # django.contrib.auth) you may enable sending PII data.
+        send_default_pii=True
+    )
 else:
     URL_BASE = 'https://mimifit.herokuapp.com'
     REDIRECT_URI = 'https://mimifit.herokuapp.com/oauth/login/'
@@ -238,16 +251,4 @@ GOOGLEFIT_CONFIG = {
 
 
 
-sentry_sdk.init(
-    dsn=env('SENTRY_DSN'),
-    integrations=[DjangoIntegration()],
 
-    # Set traces_sample_rate to 1.0 to capture 100%
-    # of transactions for performance monitoring.
-    # We recommend adjusting this value in production.
-    traces_sample_rate=1.0,
-
-    # If you wish to associate users to errors (assuming you are using
-    # django.contrib.auth) you may enable sending PII data.
-    send_default_pii=True
-)

@@ -48,8 +48,6 @@ def check(self):
 
 def do(self):
     res = True
-    # 2 días antes
-    #calendario = Calendario.objects.only('id').filter(fecha__lt=date.today() - timedelta(days=2) ).filter(activo=True)
     calendario = Calendario.objects.only('id').filter(fecha__lt=date.today() - timedelta(days=1)).filter(activo=True)
     if len(calendario) == 0:
         return True

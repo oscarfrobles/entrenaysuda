@@ -1,5 +1,6 @@
 import json
 import requests
+from django.db.models import QuerySet
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse
@@ -15,6 +16,9 @@ from django.core.paginator import Paginator
 from fitapp.apigoogle.googlefit import oauth_authenticate, oauth_login, get_session_oauth, get_data_oauth
 from fitapp.apigoogle.crud import updateCalendario, getData
 from .utils import get_random_txt
+from django.core.serializers.json import DjangoJSONEncoder
+
+
 
 logger = logging.getLogger(__name__)
 
@@ -285,3 +289,26 @@ def call_view_googlefit_authenticate(request):
     except Exception as e:
         raise Exception(e)
 
+
+def calendar_view(request):
+    """ Mostrará un calendario con los ejercicios"""
+    template = loader.get_template('calendario.html')
+    username = request.user.id
+    entrenamientos = get_calendario(request, activo='False' )
+
+
+
+
+    q = Calendario.objects.values('comentario', 'fecha', 'completado', 'ejercicios__nombre',
+                                        'ejercicios__indicaciones', 'ejercicios__url', 'ejercicios__tiempo',
+                                        'ejercicios__reps', 'series','calories','steps','estimated_steps','distance',
+                                        'heart','bpm','weight','session_google', 'session_google__name',
+                                        'session_google__description','session_google__duration',
+                                  'session_google__name','session_google__activityType').filter(user=username)
+
+
+
+    data = json.dumps(list(q), cls=DjangoJSONEncoder)
+
+    context = {'json_cal': data}
+    return HttpResponse(template.render(context, request))
