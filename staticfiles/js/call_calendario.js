@@ -1,4 +1,4 @@
-jQuery(function ($){
+
 $(document).ready(function(){
  url = 'calendario/'
  $.ajax({
@@ -14,5 +14,4 @@ $(document).ready(function(){
                 $('.calendario').html(jqXHR.responseText);
             });
 
-});
 });
