@@ -95,3 +95,8 @@ def get_Sesiones(d):
 def set_global_context(context, key, value):
     context.dicts[0][key] = value
     return ''
+
+@register.filter(name='escape_str')
+def escape_str(quoted_string):
+    print(quoted_string.replace("'", "\\'").replace('\n', '\\n').replace('\r','\\r').replace('\n\r','\\n\\r').replace('null',"\"null\""))
+    return quoted_string.replace("'", "\\'").replace('\n', '\\n').replace('\r','\\r').replace('\n\r','\\n\\r').replace('null',"\"null\"")
