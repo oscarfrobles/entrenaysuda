@@ -74,6 +74,10 @@ $(document).ready(function(){
   		},
 	})
 
+	escape_html = function(str){
+	    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+	}
+
 	$(".fecha").on('pickmeup-change', function (e) {
 	   // dt = new Date();
         //console.log(e.detail.formatted_date); // New date according to current format
@@ -89,7 +93,7 @@ $(document).ready(function(){
         }
          top.$('.fecha-txt').html(e.detail.formatted_date);
          top.$('.completado-txt').html(completado(cal_data['completado']));
-         top.$('.comentario-txt').html(cal_data['comentario']);
+         top.$('.comentario-txt').html(escape_html(cal_data['comentario']));
          top.$('.series-txt').html(cal_data['series']);
      });
 

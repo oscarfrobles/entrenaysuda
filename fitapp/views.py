@@ -303,12 +303,12 @@ def calendar_view(request):
                                         'ejercicios__indicaciones', 'ejercicios__url', 'ejercicios__tiempo',
                                         'ejercicios__reps', 'series','calories','steps','estimated_steps','distance',
                                         'heart','bpm','weight','session_google', 'session_google__name',
-                                        'session_google__description','session_google__duration',
-                                  'session_google__name','session_google__activityType').filter(user=username)
-
+                                        'session_google__duration','session_google__name','session_google__activityType').filter(user=username)
 
 
     data = json.dumps(list(q), cls=DjangoJSONEncoder)
 
-    context = {'json_cal': data}
+    print(data.replace("'", r"\\'").replace("/", r"\\/").replace('\n', '\\n').replace('\r','\\r'))
+
+    context = {'json_cal': data.replace("'", r"\'").replace("/", r"\/").replace('\n', '\\n').replace('\r','\\r') }
     return HttpResponse(template.render(context, request))

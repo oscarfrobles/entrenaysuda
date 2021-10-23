@@ -22,14 +22,14 @@
     {% endblock %}
     <script src="{% static 'js/login.js' %}"></script>
     <script language="JavaScript">
-        {% autoescape off %}
-        var json_cal_aux =' {{ json_cal }} ';
-         {% endautoescape %}
-        var json_cal = $.parseJSON(json_cal_aux);
-
-
-
-
+        jQuery(function ($){
+            $(document).ready(function(){
+                 {% autoescape off %}
+                     var json_cal_aux =JSON.stringify({{ json_cal }});
+                 {% endautoescape %}
+                 json_cal = $.parseJSON(json_cal_aux);
+             });
+         });
     </script>
     <script src="{% static 'js/pickmeup.min.js' %}"></script>
     <script src="{% static 'js/calendario.js' %}"></script>
