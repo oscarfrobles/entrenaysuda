@@ -4,12 +4,15 @@ $(document).ready(function(){
  $.ajax({
             url: url,
             type: 'get',
-            dataType: 'html',
+            dataType: 'json',
             async: false,
             success: function(data) {
-                $('.calendario').html(unescape(data.toString()));
+                $('.calendario').html(data.toString());
             }
-         });
+         }).fail( function(jqXHR, textStatus, errorThrown) {
+                console.log( jqXHR.status + " " + jqXHR.responseText );
+                $('.calendario').html(jqXHR.responseText);
+            });
 
 });
 });
