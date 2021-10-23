@@ -1,4 +1,4 @@
-
+jQuery(function ($){
 $(document).ready(function(){
     $("#login").click(function(){
         $("#myModal").modal();
@@ -8,7 +8,7 @@ $(document).ready(function(){
     });
 
     show_contenidos();
-});
+
 
 function show_contenidos(){
     if($(".login_on").length > 0){
@@ -57,4 +57,6 @@ function login_to_user(){
               error : function(data){alert(data.response);}
           });
 
-  }
+      }
+  });
+});
