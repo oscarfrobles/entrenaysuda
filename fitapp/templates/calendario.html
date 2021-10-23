@@ -28,14 +28,9 @@
     <script language="JavaScript">
         {% autoescape off %}
         var json_cal_aux =' {{ json_cal }} ';
-
-
          {% endautoescape %}
-
         var json_cal = $.parseJSON(json_cal_aux);
-        for(let i = 0; i < json_cal.length; i++) {
-            //console.log(json_cal[i]);  // (o el campo que necesites)
-        }
+
 
 
 

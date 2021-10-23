@@ -7,7 +7,7 @@ $(document).ready(function(){
             dataType: 'html',
             async: false,
             success: function(data) {
-                $('.calendario').html(data.toString());
+                $('.calendario').html(unescape(data.toString()));
             }
          });
 
