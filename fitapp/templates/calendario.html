@@ -3,23 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>mimiFit::Entrenamientos[Calndario]</title>
-    <!-- CSS only -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <!-- Compiled and minified Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- Add additional CSS in static file -->
-
-    <!-- Minified JS library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- Compiled and minified Bootstrap JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
     {% load static %}
     {% block style %}
     <link rel="text/css" type="text/css" href="{% static 'css/build/estilos.css' %}?{% now 'U' %}">
-        <link rel="stylesheet" type="text/css" href="{% static "fontawesome/css/all.min.css" %}" />
+
      <link rel="stylesheet" type="text/css" href="{% static 'css/build/pickmeup.css' %}?{% now 'U' %}">
      <link rel="stylesheet" type="text/css" href="{% static 'css/build/pickmeup-overwrite.css' %}?{% now 'U' %}">
      <link rel="stylesheet" type="text/css" href="{% static 'css/build/pickmeup-overwrite.css' %}?{% now 'U' %}">
