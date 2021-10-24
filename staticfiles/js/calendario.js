@@ -23,10 +23,10 @@ $(document).ready(function(){
             comp = "<span class='rojo'>NO REALIZADO</span>";
             break;
             case 1:
-            comp = "<span class='naranja'>SEMICOMPLETO</span>";
+            comp = "<span class='naranja'>COMPLETO</span>";
             break;
             case 2:
-            comp = "<span class='verde'>COMPLETO</span>";
+            comp = "<span class='verde'>SEMICOMPLETO</span>";
             break;
         }
         return comp;
@@ -109,7 +109,7 @@ $(document).ready(function(){
         }
         $('.fecha-txt', window.parent.document).html(e.detail.formatted_date);
         $('.completado-txt', window.parent.document).html(completado(cal_data['completado']));
-        $('.comentario-txt', window.parent.document).html(escape_html(cal_data['comentario']));
+        $('.comentario-txt', window.parent.document).html(cal_data['comentario']);
         $('.series-txt', window.parent.document).html(cal_data['series']);
      });
 
