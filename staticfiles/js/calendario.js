@@ -83,8 +83,13 @@ $(document).ready(function(){
         //console.log(e.detail.formatted_date); // New date according to current format
         ej = null;
         cal_data = data[e.detail.formatted_date];
+        if(cal_data == undefined){
+            return true;
+        }
+
         jQuery.noConflict();
         $("#modalcalendario", window.parent.document).modal();
+        console.log(cal_data);
         if (Array.isArray(cal_data) && cal_data['ejercicios'] != undefined){
             ej = cal_data['ejercicios'];
         }
