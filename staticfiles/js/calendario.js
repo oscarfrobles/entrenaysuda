@@ -33,6 +33,7 @@ $(document).ready(function(){
       }
 
       init = function(){
+        data = []
         for(let i =0; i < json_cal.length; i++){
             fecha = json_cal[i]['fecha'];
             if (Array.isArray(data[fecha]) == false){
@@ -85,9 +86,6 @@ $(document).ready(function(){
   		},
 	})
 
-	escape_html = function(str){
-	    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-	}
 
 	$(".fecha").on('pickmeup-change', function (e) {
 	   // dt = new Date();
