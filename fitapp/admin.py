@@ -18,7 +18,7 @@ class CalendarioAdmin(admin.ModelAdmin):
         return "\n".join(['['+ p.nombre + '],' for p in obj.ejercicios.all()])
 
 class EjercicioAdmin(admin.ModelAdmin):
-    list_display = ('nombre','zona','nivel')
+    list_display = ('nombre','zona','nivel','orden')
     save_as = True
 
 class SesionesGoogleAdmin(admin.ModelAdmin):

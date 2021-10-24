@@ -300,10 +300,11 @@ def calendar_view(request):
 
 
     q = Calendario.objects.values('comentario', 'fecha', 'completado', 'ejercicios__nombre',
-                                        'ejercicios__indicaciones', 'ejercicios__url', 'ejercicios__tiempo',
+                                        'ejercicios__indicaciones', 'ejercicios__url', 'ejercicios__orden', 'ejercicios__tiempo',
                                         'ejercicios__reps', 'series','calories','steps','estimated_steps','distance',
                                         'heart','bpm','weight','session_google', 'session_google__name',
-                                        'session_google__duration','session_google__name','session_google__activityType').filter(user=username)
+                                        'session_google__duration','session_google__name',
+                                        'session_google__activityType').filter(user=username).order_by('ejercicios__orden')
 
 
     data = json.dumps(list(q), cls=DjangoJSONEncoder)

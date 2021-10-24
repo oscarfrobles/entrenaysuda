@@ -14,6 +14,7 @@ class Sesiones(Oauth):
         headers = {'content-type': 'application/json; encoding=utf-8',
                    'Authorization': 'Bearer %s' % OAUTH_TOKEN}
         startTime, endTime = getDataTimes(raw=True, timedelta=super().getOauthConfig('timedelta_session'))
+
         url_s = super().getOauthConfig('url_session') % {'startTime': startTime, 'endTime': endTime}
         q = requests.get(url_s, headers=headers).json()
 
