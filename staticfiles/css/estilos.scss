@@ -235,7 +235,13 @@ color: orange;
     text-align: center;
 }
 
+.hide {
+    display: none;
+}
 
+.show {
+    display: block;
+}
 
  @media (min-width: 768px) {
     body{
