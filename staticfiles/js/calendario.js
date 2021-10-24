@@ -1,4 +1,15 @@
 jQuery(function ($){
+
+deb = 0;
+
+debug = function(param){
+    if (deb==1){
+        return console.log(param);
+    }
+    return false;
+}
+
+
 $(document).ready(function(){
 
       arr_fechas = [];
@@ -33,7 +44,7 @@ $(document).ready(function(){
             data[fecha]['series'] = json_cal[i]['series'];
 
             data[fecha]['ejercicios'].push(json_cal[i]['ejercicios__nombre']);
-            console.log(data[fecha]['ejercicios']);
+            debug(data[fecha]['ejercicios']);
             if(json_cal[i]['completado'] == 0)
                  data[fecha]['class_bg'] = 'rojo';
             if(json_cal[i]['completado'] == 1)
@@ -80,7 +91,7 @@ $(document).ready(function(){
 
 	$(".fecha").on('pickmeup-change', function (e) {
 	   // dt = new Date();
-        //console.log(e.detail.formatted_date); // New date according to current format
+        //debug(e.detail.formatted_date); // New date according to current format
         ej = null;
         cal_data = data[e.detail.formatted_date];
         if(cal_data == undefined){
@@ -89,7 +100,6 @@ $(document).ready(function(){
 
         jQuery.noConflict();
         $("#modalcalendario", window.parent.document).modal();
-        console.log(cal_data);
         if (Array.isArray(cal_data) && cal_data['ejercicios'] != undefined){
             ej = cal_data['ejercicios'];
         }
@@ -101,8 +111,6 @@ $(document).ready(function(){
         $('.comentario-txt', window.parent.document).html(escape_html(cal_data['comentario']));
         $('.series-txt', window.parent.document).html(cal_data['series']);
      });
-
-	console.log(json_cal);
 
 
 
