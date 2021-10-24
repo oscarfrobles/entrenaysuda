@@ -49,9 +49,9 @@ $(document).ready(function(){
             if(json_cal[i]['completado'] == 0)
                  data[fecha]['class_bg'] = 'rojo';
             if(json_cal[i]['completado'] == 1)
-                data[fecha]['class_bg'] = 'naranja';
-            if(json_cal[i]['completado'] == 2)
                 data[fecha]['class_bg'] = 'verde';
+            if(json_cal[i]['completado'] == 2)
+                data[fecha]['class_bg'] = 'naranja';
         }
     }
 
