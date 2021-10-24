@@ -1,4 +1,7 @@
-$(document).ready(function() {
+jQuery(function ($){
+    jQuery.noConflict();
+
+    $(document).ready(function() {
 
 // Gets the video src from the data-src on each button
 
@@ -50,6 +53,8 @@ $('#submitenviar').on("click", function(event){
                 },
 
      });
+});
+
 });
 
 });
