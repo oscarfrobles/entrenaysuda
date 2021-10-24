@@ -104,7 +104,10 @@ $(document).ready(function(){
             ej = cal_data['ejercicios'];
         }
         if (null != ej && ej.length > 0){
-            $('.ejercicios-txt', window.parent.document).html(ej.join('<br>'));
+            jQuery.each(ej, function(index, value) {
+                 $('<li>').text(value).appendTo($('.ejercicios-txt', window.parent.document));
+            });
+            //$('.ejercicios-txt', window.parent.document).html(ej.join('<br>'));
         }
         $('.fecha-txt', window.parent.document).html(e.detail.formatted_date);
         $('.completado-txt', window.parent.document).html(completado(cal_data['completado']));
