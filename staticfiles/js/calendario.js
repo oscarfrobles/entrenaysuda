@@ -84,17 +84,17 @@ $(document).ready(function(){
         ej = null;
         cal_data = data[e.detail.formatted_date];
         jQuery.noConflict();
-        top.$("#modalcalendario").modal();
+        $("#modalcalendario", window.parent.document).modal();
         if (Array.isArray(cal_data) && cal_data['ejercicios'] != undefined){
             ej = cal_data['ejercicios'];
         }
         if (null != ej && ej.length > 0){
-            top.$('.ejercicios-txt').html(ej.join('<br>'));
+            $('.ejercicios-txt', window.parent.document).html(ej.join('<br>'));
         }
-         top.$('.fecha-txt').html(e.detail.formatted_date);
-         top.$('.completado-txt').html(completado(cal_data['completado']));
-         top.$('.comentario-txt').html(escape_html(cal_data['comentario']));
-         top.$('.series-txt').html(cal_data['series']);
+        $('.fecha-txt', window.parent.document).html(e.detail.formatted_date);
+        $('.completado-txt', window.parent.document).html(completado(cal_data['completado']));
+        $('.comentario-txt', window.parent.document).html(escape_html(cal_data['comentario']));
+        $('.series-txt', window.parent.document).html(cal_data['series']);
      });
 
 	console.log(json_cal);
