@@ -44,6 +44,10 @@ class Datos(Oauth):
                 # {
                 #     "dataTypeName": super().getOauthConfig('dataTypeActivitySegmentName']
                 # },
+                {
+                    "dataTypeName": super().getOauthConfig('dataTypeSleepName')
+                },
+
             ],
             "bucketByTime": {
                 "durationMillis": super().getOauthConfig('durationMillis'),
@@ -142,7 +146,7 @@ class Datos(Oauth):
 
             if len(i['dataset'][7]['point']) > 0:
                 data['watts'] = {}
-                data['watts']['value'] = i['dataset'][8]['point'][0]['value'][0]['fpVal']
+                data['watts']['value'] = i['dataset'][7]['point'][0]['value'][0]['fpVal']
                 longStart = dt.datetime.fromtimestamp(int(i['startTimeMillis']) / 1000.0, tz=dt.timezone.utc)
                 data['watts']['longstart'] = str(longStart)
                 data['watts']['start'] = i['startTimeMillis']
@@ -159,5 +163,15 @@ class Datos(Oauth):
             #     longEnd = dt.datetime.fromtimestamp(int(i['endTimeMillis']) / 1000.0, tz=dt.timezone.utc)
             #     data['activity_segments']['longend'] = str(longEnd)
             #     data['activity_segments']['end'] = i['endTimeMillis']
+
+            if len(i['dataset'][8]['point']) > 0:
+                data['sleep'] = {}
+                data['sleep']['value'] = i['dataset'][8]['point'][0]['value'][0]['fpVal']
+                longStart = dt.datetime.fromtimestamp(int(i['startTimeMillis']) / 1000.0, tz=dt.timezone.utc)
+                data['sleep']['longstart'] = str(longStart)
+                data['sleep']['start'] = i['startTimeMillis']
+                longEnd = dt.datetime.fromtimestamp(int(i['endTimeMillis']) / 1000.0, tz=dt.timezone.utc)
+                data['sleep']['longend'] = str(longEnd)
+                data['sleep']['end'] = i['endTimeMillis']
 
         return data
