@@ -35,8 +35,8 @@ def index(request):
     if request.method == "GET":
         if request.user.is_authenticated:
             username = request.user.id
-            cal = get_calendario(request, numero=4, activo=True, order='fecha')
-            hist = get_calendario(request, numero=4, activo=False, order='-fecha')
+            cal, sesiones = get_calendario(request, numero=4, activo=True, order='fecha')
+            hist, sesiones = get_calendario(request, numero=4, activo=False, order='-fecha')
             medidas = get_medidas(request) if len(get_medidas(request)['resultado']) > 0 else get_medidas(request,
                                                                                                           ultimo=True)
             diff_medidas = compara_medidas(user_id=username)
@@ -50,6 +50,7 @@ def index(request):
             context = {
                 'uname': username,
                 'calendario': cal,
+                'sesiones': sesiones,
                 'historico': hist,
                 'medidas': medidas,
                 'diff_medidas': diff_medidas,
@@ -85,11 +86,12 @@ def index(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                cal = get_calendario(request, numero=4, activo=True)
+                cal, sesiones = get_calendario(request, numero=4, activo=True)
                 medidas = get_medidas(request) if len(get_medidas(request)) > 0 else get_medidas(request, ultimo=True)
                 context = {
                     'uname': username,
                     'calendario': cal,
+                    'sesiones': sesiones,
                     'medidas': medidas
                 }
                 return HttpResponse(template.render(context, request))
@@ -122,11 +124,11 @@ def entrenamientos(request, **kwargs):
     if request.method == "GET":
         if request.user.is_authenticated:
             username = request.user.id
-            entrenamientos = get_calendario(request, id_calendario=calendario_id, activo=True)
+            entrenamientos, sesiones = get_calendario(request, id_calendario=calendario_id, activo=True)
             context = {
                 'uname': username,
                 'entrenamientos': entrenamientos,
-                # 'ejercicios': ejercicios,
+                'sesiones': sesiones,
             }
             return HttpResponse(template.render(context, request))
     if request.method == "POST" and request.is_ajax:
@@ -159,14 +161,15 @@ def historico(request, **kwargs):
         if request.user.is_authenticated:
             username = request.user.id
             if 'calendario_id' in kwargs:
-                historico = get_calendario(request, id_calendario=calendario_id, activo=False, order='fecha')
+                historico, sesiones = get_calendario(request, id_calendario=calendario_id, activo=False, order='fecha')
                 all = False
             else:
-                historico = get_calendario(request, activo=False, order='-fecha')
+                historico, sesiones = get_calendario(request, activo=False, order='-fecha')
                 all = True
             context = {
                 'uname': username,
                 'historico': historico,
+                'sesiones': sesiones,
                 'all': all,
             }
             return HttpResponse(template.render(context, request))
@@ -179,7 +182,7 @@ def historico_all(request, **kwargs):
         if request.user.is_authenticated:
             username = request.user.id
             try:
-                historico = get_calendario(request, activo=False, order='-fecha')
+                historico, sesiones = get_calendario(request, activo=False, order='-fecha')
                 paginator = Paginator(historico, 10)
 
                 page_number = request.GET.get('pag', 1)
@@ -280,7 +283,7 @@ def set_session_json_google(request):
 
 
 def get_activities_types_json_google(request):
-    url = URL_BASE + STATIC_URL + 'js/googlefit_activities_types.json'
+    url = URL_BASE + STATIC_URL + 'js/googlefit_activities_types_ES.json'
     try:
         data = requests.get(url)
     except Exception as e:
@@ -307,7 +310,7 @@ def calendar_view(request):
     """ Mostrará un calendario con los ejercicios"""
     template = loader.get_template('calendario.html')
     username = request.user.id
-    entrenamientos = get_calendario(request, activo='False' )
+    entrenamientos, sesiones = get_calendario(request, activo='False' )
 
 
 
@@ -315,14 +318,21 @@ def calendar_view(request):
     q = Calendario.objects.values('comentario', 'fecha', 'completado', 'ejercicios__nombre',
                                         'ejercicios__indicaciones', 'ejercicios__url', 'ejercicios__orden', 'ejercicios__tiempo',
                                         'ejercicios__reps', 'series','calories','steps','estimated_steps','distance',
-                                        'heart','bpm','weight','session_google', 'session_google__name',
+                                        'heart','bpm','weight').filter(user=username).order_by('ejercicios__orden')
+
+    s = Calendario.objects.values('session_google', 'session_google__name',
                                         'session_google__duration','session_google__name',
-                                        'session_google__activityType').filter(user=username).order_by('ejercicios__orden')
+                                        'session_google__activityType').filter(user=username).\
+                                        exclude(session_google__isnull=True).distinct()
 
 
     data = json.dumps(list(q), cls=DjangoJSONEncoder)
+    data_s = json.dumps(list(s), cls=DjangoJSONEncoder)
 
-    print(data.replace("'", r"\\'").replace("/", r"\\/").replace('\n', '\\n').replace('\r','\\r'))
+    #print(data.replace("'", r"\\'").replace("/", r"\\/").replace('\n', '\\n').replace('\r','\\r'))
 
-    context = {'json_cal': data.replace("'", r"\'").replace("/", r"\/").replace('\n', '\\n').replace('\r','\\r') }
+    context = {
+        'json_cal': data.replace("'", r"\'").replace("/", r"\/").replace('\n', '\\n').replace('\r','\\r'),
+        'sesiones': data_s.replace("'", r"\'").replace("/", r"\/").replace('\n', '\\n').replace('\r','\\r')
+    }
     return HttpResponse(template.render(context, request))

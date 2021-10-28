@@ -121,10 +121,13 @@
                                     </div>
                                     {% endif %}
 
-                                    {% if historico|get_Sesiones %}
-                                    {% for i in historico %}
-                                    <div class="row">
-                                        <div class="col-12">Peso: {{ i.session_google__name }}</div>
+                                    {% if sesiones %}
+                                    <h5>SESIONES: {{ sesiones|length }}</h5>
+                                    {% for i in sesiones %}
+                                    <div class="row mb-3  mb-5">
+                                        <div class="col-4">Sesión: {{ i.session_google__name }}</div>
+                                        <div class="col-4">Duración: {{ i.session_google__duration|get_Minutes }}</div>
+                                        <div class="col-4">Tipo: {{ i.session_google__activityType|get_ActivityType }}</div>
                                     </div>
                                     {% endfor %}
                                     {% endif %}
