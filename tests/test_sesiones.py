@@ -4,14 +4,14 @@ from django.test import TestCase
 import json
 
 
-class test_Oauth(TestCase):
+# class test_Oauth(TestCase):
 
-    def test_Oauth(self):
-        c = Client()
-        response = c.post('/google/')
-        # assert response.status_code
-        self.content = response.content
-        assert 'hola'
+    # def test_Oauth(self):
+    #     c = Client()
+    #     response = c.post('/google/')
+    #     # assert response.status_code
+    #     self.content = response.content
+    #     assert 'hola'
         # oauth = Oauth(request)
         # sesion = Sesiones(Oauth)
         # assert sesion.getSession()
@@ -21,8 +21,8 @@ class test_Oauth(TestCase):
     #     self.assertEqual(response.status_code, 200)
 
 
-    def test_Datasets(self):
-        sesion = Sesiones(Oauth)
-        ds = sesion.listDataSources()
-        print(ds)
+    # def test_Datasets(self):
+        # sesion = Sesiones(Oauth)
+        # ds = sesion.listDataSources()
+        # print(ds)
 
