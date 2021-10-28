@@ -26,8 +26,10 @@
             $(document).ready(function(){
                  {% autoescape off %}
                      var json_cal_aux =JSON.stringify({{ json_cal }});
+                     var sesiones_aux =JSON.stringify({{ sesiones }});
                  {% endautoescape %}
                  json_cal = $.parseJSON(json_cal_aux);
+                 sesiones_cal = $.parseJSON(sesiones_aux);
              });
          });
     </script>

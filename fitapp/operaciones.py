@@ -156,20 +156,34 @@ def get_medidas(request, **kwargs):
 
 def get_calendario(request, **kwargs):
     order = kwargs['order'] if 'order' in kwargs else 'ejercicios__orden'
+    sesiones = None
     filters = {
-        "activo": kwargs['activo'],
+        "activo": str(kwargs['activo']),
     }
     if 'id_calendario' in kwargs:
         cal = Calendario.objects.values('comentario', 'fecha', 'completado', 'ejercicios__nombre',
                                         'ejercicios__indicaciones', 'ejercicios__url', 'ejercicios__tiempo',
                                         'ejercicios__reps', 'series','calories','steps','estimated_steps','distance',
-                                        'heart','bpm','weight','session_google', 'session_google__name', 'session_google__description',
-                                        'session_google__duration','session_google__name','session_google__activityType')\
+                                        'heart','bpm','weight')\
             .filter(id=kwargs['id_calendario']).filter(**filters).order_by(order)
+        sesiones = Calendario.objects.order_by().values('session_google', 'session_google__name', 'session_google__description',
+                                        'session_google__duration','session_google__name','session_google__activityType')\
+            .filter(id=kwargs['id_calendario']).filter(**filters).exclude(session_google__isnull=True).distinct()
+        print(sesiones.count())
+
+        # str_activo = str(kwargs['activo'])
+        # cal = Calendario.objects.raw("SELECT cal.id, eje_m.calendario_id, eje_m.ejercicio_id, cal.comentario, cal.fecha, "
+        #                              "cal.completado, cal.series, cal.calories, cal.steps, cal.distance,cal.estimated_steps, "
+        #                              "eje.nombre, eje.indicaciones, eje.orden, eje.url, eje.nivel, eje.reps, eje.tiempo  "
+        #                              " FROM fitapp_calendario as cal "
+        #                              " INNER JOIN fitapp_calendario_ejercicios as eje_m ON cal.id=eje_m.calendario_id "
+        #                              " INNER JOIN fitapp_ejercicio as eje ON eje.id = eje_m.ejercicio_id"
+        #                              " WHERE cal.activo='" + str_activo + "' and cal.id='" + str(kwargs['id_calendario']) +"'")
+        # print(cal)
     else:
         if 'numero' in kwargs:
             cal = Calendario.objects.all().filter(**filters).filter(user_id=request.user.id).order_by(order)[:kwargs['numero']]
         else:
             cal = Calendario.objects.values('completado','fecha','series','id').filter(**filters).filter(user_id=request.user.id)\
                 .annotate(dcount=Count('fecha')).order_by(order)
-    return cal
+    return cal, sesiones

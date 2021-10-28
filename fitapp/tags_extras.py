@@ -1,4 +1,7 @@
+import json
+import requests
 from django.template.defaulttags import register
+from fit.settings import URL_BASE, STATIC_URL
 
 
 @register.filter(name='get_fechaEntrenamiento')
@@ -100,3 +103,29 @@ def set_global_context(context, key, value):
 def escape_str(quoted_string):
     print(quoted_string.replace("'", "\\'").replace('\n', '\\n').replace('\r','\\r').replace('\n\r','\\n\\r').replace('null',"\"null\""))
     return quoted_string.replace("'", "\\'").replace('\n', '\\n').replace('\r','\\r').replace('\n\r','\\n\\r').replace('null',"\"null\"")
+
+
+@register.filter(name='get_Minutes')
+def get_Minutes(minutes):
+    if None == minutes:
+        return ''
+    if minutes < 60:
+        tm = '{m} minutos'.format(m=minutes)
+    else:
+        tm = '{h} horas'.format(h=minutes/60)
+    return tm
+
+@register.filter(name='get_ActivityType')
+def get_ActivityType(type):
+    url = URL_BASE + STATIC_URL + 'js/googlefit_activities_types_ES.json'
+    v = None
+    try:
+        data = requests.get(url)
+        dt = json.loads(data.text)
+        for i in dt:
+            if i == str(type):
+                v = dt[i]
+
+    except Exception as e:
+        print(e)
+    return v
