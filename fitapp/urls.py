@@ -22,6 +22,7 @@ urlpatterns = [
     path('googlefit_ajax_save_session/', views.set_session_json_google, name="googlefit_set_data_ajax"),
     path('googlefit_ajax_connect/', views.get_connect_json_google, name="googlefit_set_data_ajax"),
     path('googlefit_activities_types/', views.get_activities_types_json_google, name="get_activities_types_json_google"),
+    #path('googlefit_datasets/', views.get_list_datasets_google, name="get_list_datasets_google"),
     path('sentry-debug/', trigger_error),
     #path('entrenamiento_completado/', views.entrenamiento_completado, name="entrenamiento_completado"),
     # path('medidas/nuevas/', views.medidas_nuevas, name="medidas_nuevas"),

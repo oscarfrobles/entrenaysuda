@@ -48,3 +48,27 @@ class Sesiones(Oauth):
             del session_aux
 
         return session
+
+    ''' Devuelve una cantidad de datos infumable '''
+    '''def listDataSets(self):
+        OAUTH_TOKEN = super().getOauth_Token()
+        headers = {'content-type': 'application/json; encoding=utf-8',
+                   'Authorization': 'Bearer %s' % OAUTH_TOKEN}
+
+        url_s = super().getOauthConfig('url_dataSets') % {'key': super().getOauthConfig('OAUTH_API_KEY')}
+        q = requests.get(url_s, headers=headers).json()
+        return q '''
+
+    ''' Devuelve una cantidad de datos infumable '''
+    ''' def listDataSources(self, dataStreamId):
+        OAUTH_TOKEN = super().getOauth_Token()
+        headers = {'content-type': 'application/json; encoding=utf-8',
+                   'Authorization': 'Bearer %s' % OAUTH_TOKEN}
+
+        url_s = super().getOauthConfig('url_dataSources') % {
+                                'dataStreamId': dataStreamId,
+                                'key': super().getOauthConfig('OAUTH_API_KEY')
+                }
+        q = requests.get(url_s, headers=headers).json()
+        return q '''
+

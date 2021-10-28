@@ -194,10 +194,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads/')
 
 MEDIA_URL = '/uploads/'
 
-
-OAUTH_CLIENT_ID = '426570479868-h9gncmdlrsgu3is3u8umjcf09h4l6mre.apps.googleusercontent.com'
-OAUTH_CLIENT_SECRET = '2-umuj-pyRoyQJn-9rGWLm_O'
-
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
@@ -207,6 +203,9 @@ HOSTNAME = socket.gethostname()
 if HOSTNAME == 'CIBELES-1':
     URL_BASE = 'http://127.0.0.1:8000'
     REDIRECT_URI = 'http://127.0.0.1:8000/oauth/login/'
+else:
+    URL_BASE = 'https://mimifit.herokuapp.com'
+    REDIRECT_URI = 'https://mimifit.herokuapp.com/oauth/login/'
     sentry_sdk.init(
         dsn=env('SENTRY_DSN'),
         integrations=[DjangoIntegration()],
@@ -220,23 +219,19 @@ if HOSTNAME == 'CIBELES-1':
         # django.contrib.auth) you may enable sending PII data.
         send_default_pii=True
     )
-else:
-    URL_BASE = 'https://mimifit.herokuapp.com'
-    REDIRECT_URI = 'https://mimifit.herokuapp.com/oauth/login/'
 
-
-
-CLIENT_ID = "426570479868-h9gncmdlrsgu3is3u8umjcf09h4l6mre.apps.googleusercontent.com"
-APP_SECRET_KEY = "2-umuj-pyRoyQJn-9rGWLm_O"
 
 GOOGLEFIT_CONFIG = {
     'CLIENT_ID': env('OAUTH_CLIENT_ID'),
     'APP_SECRET_KEY': env('OAUTH_APP_SECRET_KEY'),
+    'OAUTH_API_KEY': env('OAUTH_API_KEY'),
     'REDIRECT_URI': REDIRECT_URI,
     'access_token_uri': 'https://accounts.google.com/o/oauth2/token',
     'durationMillis': 86400000,
     'url_aggregate': "https://www.googleapis.com/fitness/v1/users/me/dataset:aggregate",
     'url_session': "https://www.googleapis.com/fitness/v1/users/me/sessions?startTime=%(startTime)s&endTime=%(endTime)s",
+    #'url_dataSets': "https://fitness.googleapis.com/fitness/v1/users/me/dataSources?key=%(key)s",
+    #'url_dataSources': "https://fitness.googleapis.com/fitness/v1/users/me/dataSources/%(dataStreamId)s/dataPointChanges?key=%(key)s",
     'dataTypeDistanceName': "com.google.distance.delta",
     'dataTypeStepsName':  "com.google.step_count.delta",
     'dataTypeCaloriesName':  "com.google.calories.expended",
@@ -247,7 +242,7 @@ GOOGLEFIT_CONFIG = {
     'dataTypeWattsName': "com.google.power.sample",
     'dataTypeSleepName': "com.google.sleep.segment",
     'OAUTH_SCOPES': 'https://www.googleapis.com/auth/fitness.sleep.read https://www.googleapis.com/auth/fitness.heart_rate.read https://www.googleapis.com/auth/fitness.reproductive_health.read https://www.googleapis.com/auth/fitness.body_temperature.read https://www.googleapis.com/auth/fitness.oxygen_saturation.read https://www.googleapis.com/auth/fitness.blood_glucose.read https://www.googleapis.com/auth/fitness.blood_pressure.read https://www.googleapis.com/auth/fitness.nutrition.read https://www.googleapis.com/auth/fitness.body.read https://www.googleapis.com/auth/fitness.location.read https://www.googleapis.com/auth/fitness.activity.read https://www.googleapis.com/auth/userinfo.profile',
-    'timedelta_session': 1,
+    'timedelta_session': 0,
 }
 
 
