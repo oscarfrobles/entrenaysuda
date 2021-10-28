@@ -11,11 +11,14 @@ class MedidaAdmin(admin.ModelAdmin):
     list_display = ('user','anyo','mes', 'peso', 'imc')
 
 class CalendarioAdmin(admin.ModelAdmin):
-    list_display = ('user', 'fecha', 'activo','completado', 'get_ejercicios', 'calories', 'distance')
+    list_display = ('user', 'fecha', 'activo','completado', 'get_ejercicios', 'get_sesiones', 'calories', 'distance')
     save_as = True
 
     def get_ejercicios(self, obj):
         return "\n".join(['['+ p.nombre + '],' for p in obj.ejercicios.all()])
+
+    def get_sesiones(self, obj):
+        return "\n".join(['['+ p.name + '],' for p in obj.session_google.all()])
 
 class EjercicioAdmin(admin.ModelAdmin):
     list_display = ('nombre','zona','nivel','orden')

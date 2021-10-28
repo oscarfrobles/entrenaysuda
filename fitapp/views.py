@@ -237,6 +237,19 @@ def get_data_json_google(request):
     data = json.dumps(data)
     return HttpResponse(data, content_type="application/json", status=200)
 
+
+
+''' Devuelve una cantidad de datos infumable '''
+''' def get_list_datasets_google(request):
+    session_oauth = get_session_oauth(request, url_redirect=request.path)
+    if isinstance(session_oauth, HttpResponse):
+        return session_oauth
+    ds = get_list_datasets(request, url_redirect=request.path)
+    print(ds)
+    data = {'datasets': ds}
+    data = json.dumps(data)
+    return HttpResponse(data, content_type="application/json", status=200) '''
+
 def set_data_json_google(request):
     session_oauth = get_session_oauth(request,url_redirect=request.path)
     if isinstance(session_oauth, HttpResponse):
