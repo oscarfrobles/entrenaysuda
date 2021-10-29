@@ -162,7 +162,7 @@ def get_calendario(request, **kwargs):
     }
     if 'id_calendario' in kwargs:
         cal = Calendario.objects.values('comentario', 'fecha', 'completado', 'ejercicios__nombre',
-                                        'ejercicios__indicaciones', 'ejercicios__url', 'ejercicios__tiempo',
+                                        'ejercicios__indicaciones', 'ejercicios__url', 'ejercicios__instagram_code', 'ejercicios__tiempo',
                                         'ejercicios__reps', 'series','calories','steps','estimated_steps','distance',
                                         'heart','bpm','weight')\
             .filter(id=kwargs['id_calendario']).filter(**filters).order_by(order)

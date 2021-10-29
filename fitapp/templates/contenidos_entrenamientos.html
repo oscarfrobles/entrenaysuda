@@ -41,6 +41,12 @@
                                 Vídeo
                             </button>
                             {% endif %}
+                            {% if i.ejercicios__instagram_code %}
+                            <button type="button" class="btn btn-primary video-insta" data-toggle="modal"
+                                    data-src="{{ i.ejercicios__instagram_code }}" data-target="#modalinsta">
+                                Instagram Vídeo
+                            </button>
+                            {% endif %}
                             <br>
                             {% if i.ejercicios__tiempo %}
                             Tiempo: <span class="dato">{{ i.ejercicios__tiempo }}''</span>
