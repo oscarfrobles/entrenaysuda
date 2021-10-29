@@ -54,7 +54,7 @@ class Ejercicio(models.Model):
         choices=Nivel.choices,
         default=Nivel.INICIAL,
     )
-    instagram_code =  models.TextField(default='', help_text="Código Instagram", verbose_name="Vídeo", blank=True)
+    instagram_code =  models.TextField(default='', help_text="Código Instagram", verbose_name="Instagram code insertion", blank=True)
     indicaciones = models.CharField(max_length=255, default='', blank=True)
     orden = models.IntegerField(default=10)
     def __str__(self):
