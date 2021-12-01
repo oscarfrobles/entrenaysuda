@@ -29,26 +29,21 @@ def updateSession(**kwargs):
     filters = {}
     filters_calendario = {}
     ids_sessions = []
-    try:
-        for i in kwargs['data']:
-            if kwargs['oauth_user'] is not None:
-                i['user_google'] = kwargs['oauth_user']
-            q = SesionesGoogle.objects.filter(**filters).update_or_create(**i)
-            fecha = datetime.datetime.fromtimestamp(q[0].start / 1000.0)
-            filters_calendario['fecha'] = fecha.strftime('%Y-%m-%d')
-            ids_sessions.append(q[0].id)
-    except Exception as e:
-        raise ValueError(e)
+    for i in kwargs['data']:
+        if kwargs['oauth_user'] is not None:
+            i['user_google'] = kwargs['oauth_user']
+        q = SesionesGoogle.objects.filter(**filters).update_or_create(**i)
+        fecha = datetime.datetime.fromtimestamp(q[0].start / 1000.0)
+        filters_calendario['fecha'] = fecha.strftime('%Y-%m-%d')
+        ids_sessions.append(q[0].id)
+
 
     if len(ids_sessions) > 0:
-        try:
-            filters_calendario['user'] = kwargs['user']
-            num = Calendario.objects.filter(**filters_calendario).count()
-            if num > 0:
-                query = Calendario.objects.get(**filters_calendario)
-                q = query.session_google.add(*ids_sessions)
-        except Exception as e:
-            raise ValueError(e)
+        filters_calendario['user'] = kwargs['user']
+        num = Calendario.objects.filter(**filters_calendario).count()
+        if num > 0:
+            query = Calendario.objects.get(**filters_calendario)
+            q = query.session_google.add(*ids_sessions)
 
     return True
 
