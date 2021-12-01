@@ -40,6 +40,7 @@ $(document).ready(function(){
                 data[fecha] = [];
                 data[fecha]['ejercicios'] = []
             }
+            data[fecha]['id'] = json_cal[i]['id'];
             data[fecha]['comentario'] = json_cal[i]['comentario'];
             data[fecha]['completado'] = json_cal[i]['completado'];
             data[fecha]['series'] = json_cal[i]['series'];
@@ -61,7 +62,6 @@ $(document).ready(function(){
             if(json_cal[i]['completado'] == 2)
                 data[fecha]['class_bg'] = 'naranja';
         }
-        debug('aqui');
     }
 
         init();
@@ -118,7 +118,10 @@ $(document).ready(function(){
             });
             //$('.ejercicios-txt', window.parent.document).html(ej.join('<br>'));
         }
+        var hoy = now.getFullYear() + '-' + ("0" + now.getMonth()).slice(-2) + '-' + ("0" + now.getDate()).slice(-2);
+        var enlace = (hoy > e.detail.formatted_date) ? '/historico/id/' : '/entrenamientos/';
         $('.fecha-txt', window.parent.document).html(e.detail.formatted_date);
+        $('.link-entrenamiento', window.parent.document).attr('href', enlace + cal_data['id']);
         $('.completado-txt', window.parent.document).html(completado(cal_data['completado']));
         $('.comentario-txt', window.parent.document).html(cal_data['comentario']);
         $('.series-txt', window.parent.document).html(cal_data['series']);
@@ -143,6 +146,11 @@ $(document).ready(function(){
         debug("weight: "+ cal_data['weight']);
             $('.peso-txt > span', window.parent.document).html(cal_data['weight']);
             $('.peso-txt', window.parent.document).addClass("show").removeClass("hide");
+        }
+        if(undefined != cal_data['steps'] && $.isNumeric(cal_data['steps'])){
+        debug("steps: "+ cal_data['steps']);
+            $('.pasos-txt > span', window.parent.document).html(cal_data['steps']);
+            $('.pasos-txt', window.parent.document).addClass("show").removeClass("hide");
         }
      });
 

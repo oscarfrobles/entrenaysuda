@@ -138,6 +138,8 @@ dmypy.json
 !.elasticbeanstalk/*.global.yml
 .ebextensions/*
 /requirements.txtBACK
+/requirements.txtBACK*
+*/__pycache__/*
 *.pyc
 /.ebextensions/
 /.elasticbeanstalk/
