@@ -315,7 +315,7 @@ def calendar_view(request):
 
 
 
-    q = Calendario.objects.values('id','comentario', 'fecha', 'completado', 'ejercicios__nombre',
+    q = Calendario.objects.values('id', 'comentario', 'fecha', 'completado', 'ejercicios__nombre',
                                         'ejercicios__indicaciones', 'ejercicios__url', 'ejercicios__orden', 'ejercicios__tiempo',
                                         'ejercicios__reps', 'series','calories','steps','estimated_steps','distance',
                                         'heart','bpm','weight').filter(user=username).order_by('ejercicios__orden')
