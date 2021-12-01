@@ -1,5 +1,9 @@
 from fitapp.models import Calendario, SesionesGoogle
 import datetime
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 
 def getData(**kwargs):
@@ -29,6 +33,7 @@ def updateSession(**kwargs):
     filters = {}
     filters_calendario = {}
     ids_sessions = []
+    logger.info(kwargs['data'])
     for i in kwargs['data']:
         if kwargs['oauth_user'] is not None:
             i['user_google'] = kwargs['oauth_user']
