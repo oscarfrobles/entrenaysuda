@@ -53,7 +53,7 @@ jQuery(function ($){
                     $.each(data.inserts, function(index, value){
                         $(".general-txt").append(index + ': ' + value + "<br>");
                     });
-                    console.log(data);
+                    //console.log(data);
                     if(data.session.length > 0){
                         $(".general-txt").parent().append("<p><div class='sesiones'></div></p>");
                         $(".sesiones-txt").html('<p class="numSesiones">Existen ' + data.session.length +' sesiones:</p>');
