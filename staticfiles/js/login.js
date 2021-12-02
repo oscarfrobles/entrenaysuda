@@ -17,7 +17,6 @@ jQuery(function ($){
             $(".contenidos").show();
         }
         else{
-            console.log("hide");
             $(".contenidos").hide();
         }
     }

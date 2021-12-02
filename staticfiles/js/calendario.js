@@ -1,6 +1,6 @@
 jQuery(function ($){
 
-deb = 1;
+deb = 0;
 
 debug = function(param){
     if (deb==1){
@@ -118,7 +118,7 @@ $(document).ready(function(){
             });
             //$('.ejercicios-txt', window.parent.document).html(ej.join('<br>'));
         }
-        var hoy = now.getFullYear() + '-' + ("0" + now.getMonth()).slice(-2) + '-' + ("0" + now.getDate()).slice(-2);
+        var hoy = now.getFullYear() + '-' + ("0" + now.getMonth() + 1).slice(-2) + '-' + ("0" + now.getDate()).slice(-2);
         debug('hoy: ' + hoy );
         debug('date: ' + e.detail.formatted_date);
         debug(hoy >  e.detail.formatted_date);
