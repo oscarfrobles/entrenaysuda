@@ -1,6 +1,6 @@
 jQuery(function ($){
 
-deb = 0;
+deb = 1;
 
 debug = function(param){
     if (deb==1){
@@ -119,6 +119,8 @@ $(document).ready(function(){
             //$('.ejercicios-txt', window.parent.document).html(ej.join('<br>'));
         }
         var hoy = now.getFullYear() + '-' + ("0" + now.getMonth()).slice(-2) + '-' + ("0" + now.getDate()).slice(-2);
+        debug('hoy: ' + hoy );
+        debug('date: ' + e.detail.formatted_date);
         var enlace = (hoy > e.detail.formatted_date) ? '/historico/id/' : '/entrenamientos/';
         $('.fecha-txt', window.parent.document).html(e.detail.formatted_date);
         $('.link-entrenamiento', window.parent.document).attr('href', enlace + cal_data['id']);
