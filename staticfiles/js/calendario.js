@@ -121,6 +121,9 @@ $(document).ready(function(){
         var hoy = now.getFullYear() + '-' + ("0" + now.getMonth()).slice(-2) + '-' + ("0" + now.getDate()).slice(-2);
         debug('hoy: ' + hoy );
         debug('date: ' + e.detail.formatted_date);
+        debug(hoy >  e.detail.formatted_date);
+        debug(hoy <  e.detail.formatted_date);
+        debug(hoy ==  e.detail.formatted_date);
         var enlace = (hoy > e.detail.formatted_date) ? '/historico/id/' : '/entrenamientos/';
         $('.fecha-txt', window.parent.document).html(e.detail.formatted_date);
         $('.link-entrenamiento', window.parent.document).attr('href', enlace + cal_data['id']);
