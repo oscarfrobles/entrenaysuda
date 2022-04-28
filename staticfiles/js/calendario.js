@@ -1,6 +1,6 @@
 jQuery(function ($){
 
-deb = 0;
+deb = 1;
 
 debug = function(param){
     if (deb==1){
@@ -97,7 +97,6 @@ $(document).ready(function(){
 
 
 	$(".fecha").on('pickmeup-change', function (e) {
-//	   $('.calorias-txt, .bpm-txt, .distance-txt, .weight-txt', window.parent.document).attr("class", "hide");
        $('.calorias-txt, .bpm-txt, .distancia-txt, .peso-txt', window.parent.document).removeClass("show").addClass("hide");
        $('.calorias-txt > span,  .bpm-txt > span, .distancia-txt > span, .peso-txt > span').empty();
 
@@ -116,15 +115,21 @@ $(document).ready(function(){
                 debug(index + " " + value);
                  $('<li>').text(value).appendTo($('.ejercicios-txt', window.parent.document));
             });
-            //$('.ejercicios-txt', window.parent.document).html(ej.join('<br>'));
         }
-        var hoy = now.getFullYear() + '-' + ("0" + now.getMonth() + 1).slice(-2) + '-' + ("0" + now.getDate()).slice(-2);
+        var hoy = now.getFullYear() + '-' + ("0" + parseInt(now.getMonth() + 1)).slice(-2) + '-' + ("0" + now.getDate()).slice(-2);
         debug('hoy: ' + hoy );
         debug('date: ' + e.detail.formatted_date);
-        debug(hoy >  e.detail.formatted_date);
-        debug(hoy <  e.detail.formatted_date);
-        debug(hoy ==  e.detail.formatted_date);
-        var enlace = (hoy > e.detail.formatted_date) ? '/historico/id/' : '/entrenamientos/';
+        dt_hoy = Date.parse(hoy);
+        dt_detail = Date.parse(e.detail.formatted_date);
+        debug('date hoy: ' + dt_hoy + " dt_detail: " + dt_detail);
+        debug('date hoy - dt_detail ' + parseInt(dt_hoy - dt_detail));
+
+        debug("hoy > detail" + hoy >  e.detail.formatted_date);
+        debug("hoy < detail" + hoy <  e.detail.formatted_date);
+        debug("hoy = detail" + hoy ==  e.detail.formatted_date);
+        debug("(dt_hoy - dt_detail)" + (dt_hoy - dt_detail) + "Si > 86400000 historico si no entrenamientos");
+        var enlace = ((dt_hoy - dt_detail) >  86400000) ? '/historico/id/' : '/entrenamientos/';
+
         $('.fecha-txt', window.parent.document).html(e.detail.formatted_date);
         $('.link-entrenamiento', window.parent.document).attr('href', enlace + cal_data['id']);
         $('.completado-txt', window.parent.document).html(completado(cal_data['completado']));
