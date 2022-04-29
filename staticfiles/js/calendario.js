@@ -1,6 +1,6 @@
 jQuery(function ($){
 
-deb = 1;
+deb = 0;
 
 debug = function(param){
     if (deb==1){
