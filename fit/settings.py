@@ -200,7 +200,8 @@ os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 
 HOSTNAME = socket.gethostname()
-if HOSTNAME == 'CIBELES-1':
+
+if HOSTNAME == env('HOSTNAME'):
     URL_BASE = 'http://127.0.0.1:8000'
     REDIRECT_URI = 'http://127.0.0.1:8000/oauth/login/'
 else:
