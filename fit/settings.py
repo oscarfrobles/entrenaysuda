@@ -251,9 +251,11 @@ GOOGLEFIT_CONFIG = {
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
+
+
 # Q_CLUSTER CONF
 Q_CLUSTER = {
-    'name': 'xchecks',
+    'name': 'fitapp',
     'workers': 1,
     'recycle': 500,
     'orm': 'default',
