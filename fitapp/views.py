@@ -42,6 +42,7 @@ def index(request):
             diff_medidas = compara_medidas(user_id=username)
             entre_completados_mes = completados_mes(user_id=username, finalizacion=1)
             entre_incompletados_mes = completados_mes(user_id=username, finalizacion=2)
+            entre_norealizados_mes = completados_mes(user_id=username, finalizacion=0)
             ejercicios_mes_uno = tipo_ejercicios_mes(user_id=username, zona=1)
             ejercicios_mes_dos = tipo_ejercicios_mes(user_id=username, zona=2)
             ejercicios_mes_tres = tipo_ejercicios_mes(user_id=username, zona=3)
@@ -56,6 +57,7 @@ def index(request):
                 'diff_medidas': diff_medidas,
                 'completados_mes': entre_completados_mes,
                 'incompletados_mes': entre_incompletados_mes,
+                'norealizados_mes': entre_norealizados_mes,
                 'ejerc_zona_uno': ejercicios_mes_uno,
                 'ejerc_zona_dos': ejercicios_mes_dos,
                 'ejerc_zona_tres': ejercicios_mes_tres,

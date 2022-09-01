@@ -55,6 +55,7 @@
                         {% if user.is_authenticated %}
                             <p>COMPLETADOS: <span class="dato">{{ completados_mes }}</span></p>
                             <p>NO COMPLETADOS: <span class="dato">{{ incompletados_mes }}</span></p>
+                            <p>NO REALIZADOS: <span class="dato">{{ norealizados_mes }}</span></p>
                         {% endif %}
                     {% endblock %}
                 </div>

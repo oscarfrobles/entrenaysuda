@@ -12,6 +12,7 @@ class MedidaAdmin(admin.ModelAdmin):
 
 class CalendarioAdmin(admin.ModelAdmin):
     list_display = ('user', 'fecha', 'activo','completado', 'get_ejercicios', 'get_sesiones', 'calories', 'distance')
+    ordering = ['-fecha']
     save_as = True
 
     def get_ejercicios(self, obj):
@@ -22,6 +23,7 @@ class CalendarioAdmin(admin.ModelAdmin):
 
 class EjercicioAdmin(admin.ModelAdmin):
     list_display = ('nombre','zona','nivel','orden')
+    ordering = ['nombre']
     save_as = True
 
 class SesionesGoogleAdmin(admin.ModelAdmin):

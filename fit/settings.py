@@ -201,7 +201,8 @@ os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 
 HOSTNAME = socket.gethostname()
-if HOSTNAME == 'CIBELES-1':
+
+if HOSTNAME == 'MacBook-Air-de-Oscar.local':
     URL_BASE = 'http://127.0.0.1:8000'
     REDIRECT_URI = 'http://127.0.0.1:8000/oauth/login/'
 else:
@@ -249,6 +250,7 @@ GOOGLEFIT_CONFIG = {
 
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
 
 
 # Q_CLUSTER CONF
