@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap4',
     'django_static_fontawesome',
+    'django_q',
 ]
 
 MIDDLEWARE = [
@@ -248,3 +249,21 @@ GOOGLEFIT_CONFIG = {
 
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+
+# Q_CLUSTER CONF
+Q_CLUSTER = {
+    'name': 'fitapp',
+    'workers': 1,
+    'recycle': 500,
+    'orm': 'default',
+    'timeout': 900,
+    'compress': True,
+    'save_limit': 250,
+    'queue_limit': 500,
+    'cpu_affinity': 1,
+    'retry': 1200,
+    'max_attempts': 3,
+    'label': 'Django Q',
+}
+# Q_CLUSTER CONF
