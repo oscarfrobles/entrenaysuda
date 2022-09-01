@@ -15,7 +15,4 @@ $(document).ready(function(){
   		mode      : 'single',
 	});
 
-    console.log('hola');
-    console.log(cal);
-
 });
