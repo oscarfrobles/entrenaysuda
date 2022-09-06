@@ -1,4 +1,6 @@
-from .models import Medida, Calendario
+import datetime
+
+from .models import Medida, Calendario, User, Ejercicio
 from django.db.models import Count
 from datetime import date
 import logging
@@ -187,3 +189,61 @@ def get_calendario(request, **kwargs):
             cal = Calendario.objects.values('completado','fecha','series','id').filter(**filters).filter(user_id=request.user.id)\
                 .annotate(dcount=Count('fecha')).order_by(order)
     return cal, sesiones
+
+def checkCalendarToday(**kwargs):
+    if datetime.datetime.today().weekday() in [5,6]:
+        return True
+    dt = datetime.datetime.now()
+    users = User.objects.values('id')
+    for user in users:
+        filters = {
+            'fecha': "%d-%02d-%02d" % (dt.year, dt.month, dt.day),
+            'user_id': user['id'],
+        }
+        cal = Calendario.objects.filter(**filters)
+        if cal.count() == 0:
+            copy = copy_call(user['id'])
+    return copy
+
+''' Si no existe un entrenamiento para el día de hoy copia el entrenamiento
+de hace 7 días y si no existe copia el último que haya
+'''
+def copy_call(user_id):
+    dt = datetime.datetime.now() - datetime.timedelta(days=-7)
+    today = datetime.datetime.now()
+    filters = {
+        'user_id': user_id,
+        'fecha': "%d-%02d-%02d" % (dt.year, dt.month, dt.day),
+    }
+    try:
+        last = Calendario.objects.values("id", "series", "fecha", "ejercicios__id").filter(**filters)
+        if last.count()==0:
+            print("no hay en los últimos días")
+            if 'fecha' in filters:
+                del filters['fecha']
+            last = Calendario.objects.values("id", "series", "fecha").filter(**filters).last()
+            filters['id'] = last['id']
+        last = Calendario.objects.values("id", "series", "fecha", "ejercicios__id", "ejercicios__nombre").filter(**filters)\
+            .annotate(dcount=Count('id')).order_by()
+
+        data = {
+            'ejercicios_id': [],
+        }
+        for i in last:
+            data['ejercicios_id'].append(i['ejercicios__id'])
+            data['series']= i['series']
+            data['fecha']= datetime.date(today.year, today.month, today.day)
+
+
+        filters = {
+            'activo': True,
+            'completado': 0,
+            'fecha': data['fecha'],
+            'user_id': user_id,
+            'series': data['series'],
+        }
+        new = Calendario.objects.create(**filters)
+        related = new.ejercicios.set(data['ejercicios_id'])
+    except Exception as e:
+        logger.error(str(e))
+    return True
