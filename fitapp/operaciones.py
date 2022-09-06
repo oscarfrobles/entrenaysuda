@@ -191,6 +191,7 @@ def get_calendario(request, **kwargs):
     return cal, sesiones
 
 def checkCalendarToday(**kwargs):
+    copy = False
     if datetime.datetime.today().weekday() in [5,6]:
         return True
     dt = datetime.datetime.now()
