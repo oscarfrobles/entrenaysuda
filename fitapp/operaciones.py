@@ -200,7 +200,7 @@ def checkCalendarToday(**kwargs):
     return copy
 
 def getUsers():
-    users = User.objects.values('id','email')
+    users = User.objects.values('id','email', 'username', 'first_name', 'last_name')
     return users
 
 def getDefaultCalendarFilters(**kwargs):
