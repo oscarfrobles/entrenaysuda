@@ -192,24 +192,46 @@ def get_calendario(request, **kwargs):
 
 def checkCalendarToday(**kwargs):
     copy = False
-    if datetime.datetime.today().weekday() in [5,6]:
-        return True
-    dt = datetime.datetime.now()
-    users = User.objects.values('id')
+    users = getUsers()
     for user in users:
-        filters = {
-            'fecha': "%d-%02d-%02d" % (dt.year, dt.month, dt.day),
-            'user_id': user['id'],
-        }
-        cal = Calendario.objects.filter(**filters)
-        if cal.count() == 0:
-            copy = copy_call(user['id'])
+        numEvents = checkNumEventsToday(user_id=user['id'])
+        if numEvents == 0:
+            copy = copy_calendar(user['id'])
     return copy
+
+def getUsers():
+    users = User.objects.values('id','email')
+    return users
+
+def getDefaultCalendarFilters(**kwargs):
+    dt = datetime.datetime.now()
+    user = kwargs.get('user_id')
+    filters = {
+        'fecha': "%d-%02d-%02d" % (dt.year, dt.month, dt.day),
+        'user_id': user,
+    }
+    return filters
+
+def checkNumEventsToday(**kwargs):
+    user = kwargs.get('user_id')
+    filters = getDefaultCalendarFilters(user_id=user)
+    cal = Calendario.objects.filter(**filters)
+    return cal.count()
+
+''' Retorna el id del calendario para el día de hoy del usuario recibido por parámetro'''
+def getTodayIdEvent(**kwargs):
+    user_id = kwargs.get('user_id')
+    dt = datetime.datetime.now()
+    filters = getDefaultCalendarFilters(user_id=kwargs['user_id'])
+    calendar_id = Calendario.objects.values('id').filter(**filters)
+    return calendar_id[0]['id']
+
+
 
 ''' Si no existe un entrenamiento para el día de hoy copia el entrenamiento
 de hace 7 días y si no existe copia el último que haya
 '''
-def copy_call(user_id):
+def copy_calendar(user_id):
     dt = datetime.datetime.now() - datetime.timedelta(days=-7)
     today = datetime.datetime.now()
     filters = {
