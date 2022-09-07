@@ -19,12 +19,17 @@ class Command(BaseCommand):
                 print("no hay eventos para hoy")
                 return False
             sg = False
-            url = "https://mimifit.herokuapp.com/entrenamientos/%d" % getTodayIdEvent(user_id=user['id'])
+            home = "https://mimifit.herokuapp.com/"
+            url = "%s/entrenamientos/%d" % (home, getTodayIdEvent(user_id=user['id']) )
+
             message = Mail(
                 from_email='oskijob@gmail.com',
                 to_emails=user['email'],
-                subject='Hoy tienes un nuevo reto que debes completar',
-                html_content='Tu reto está en %s. Accede y <strong>termínalo</strong>' % url
+                subject='Hola %s %s. Hoy tienes un nuevo reto que debes completar' % (user['first_name'], user['last_name']),
+                html_content='Hola <strong><i>%s</i></strong>. <br/><br/> Tu nuevo reto está en %s. '
+                             'Accede y <strong>termínalo</strong>'
+                             '<br/><br/> Si al acceder tienes un error tienes que hacer login de nuevo '
+                             'en %s y conectarte en login' % (user['username'], url, home)
             )
             try:
                 sg = SendGridAPIClient(os.environ.get("SENDGRID_API_KEY"))
