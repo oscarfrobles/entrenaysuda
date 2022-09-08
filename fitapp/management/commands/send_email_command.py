@@ -19,7 +19,7 @@ class Command(BaseCommand):
                 print("no hay eventos para hoy")
                 return False
             sg = False
-            home = "https://mimifit.herokuapp.com/"
+            home = "https://mimifit.herokuapp.com"
             url = "%s/entrenamientos/%d" % (home, getTodayIdEvent(user_id=user['id']) )
 
             message = Mail(
