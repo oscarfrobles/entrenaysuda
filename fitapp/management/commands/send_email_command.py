@@ -52,7 +52,6 @@ class Command(BaseCommand):
 
     def sendEmail(self, **kwargs):
         email = kwargs.get('email')
-        user_id = kwargs.get('user_id')
         first_name = kwargs.get('first_name')
         last_name = kwargs.get('last_name')
         username = kwargs.get('username')
