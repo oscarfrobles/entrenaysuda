@@ -220,11 +220,29 @@ def checkNumEventsToday(**kwargs):
 
 ''' Retorna el id del calendario para el día de hoy del usuario recibido por parámetro'''
 def getTodayIdEvent(**kwargs):
+    result = False
     user_id = kwargs.get('user_id')
     dt = datetime.datetime.now()
     filters = getDefaultCalendarFilters(user_id=kwargs['user_id'])
     calendar_id = Calendario.objects.values('id').filter(**filters)
-    return calendar_id[0]['id']
+    if calendar_id.count() > 0:
+        result = calendar_id[0]['id']
+    return result
+
+''' Retorna el id del calendario para el día de hoy del usuario recibido por parámetro'''
+def getLastActiveIdEvent(**kwargs):
+    result = False
+    user_id = kwargs.get('user_id')
+    dt = datetime.datetime.now()
+    filters = getDefaultCalendarFilters(user_id=kwargs['user_id'])
+    filters.pop('fecha')
+    filters['activo'] = False
+    filters['completado'] = 0
+    calendar_id = Calendario.objects.values('id').filter(**filters).last()
+    if str(calendar_id['id']).isnumeric() and None != calendar_id:
+        result = calendar_id['id']
+    return result
+
 
 
 
