@@ -262,6 +262,8 @@ def copy_calendar(user_id):
             print("no hay en los últimos días")
             if 'fecha' in filters:
                 del filters['fecha']
+                filters['activo'] = False
+                filters['completado'] = 0
             last = Calendario.objects.values("id", "series", "fecha").filter(**filters).last()
             filters['id'] = last['id']
         last = Calendario.objects.values("id", "series", "fecha", "ejercicios__id", "ejercicios__nombre").filter(**filters)\
