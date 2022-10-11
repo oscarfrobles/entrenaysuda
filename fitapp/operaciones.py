@@ -244,7 +244,7 @@ def getLastActiveIdEvent(**kwargs):
         print(e)
     if str(calendar_id['id']).isnumeric() and None != calendar_id:
         print(calendar_id)
-        result = calendar_id['id'], calendar_id['ejercicios__nombre']
+        result = (calendar_id['id'], calendar_id['ejercicios__nombre'])
     return result
 
 
