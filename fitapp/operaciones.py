@@ -215,8 +215,11 @@ def getDefaultCalendarFilters(**kwargs):
 def checkNumEventsToday(**kwargs):
     user = kwargs.get('user_id')
     filters = getDefaultCalendarFilters(user_id=user)
-    cal = Calendario.objects.filter(**filters)
-    return cal.count()
+    try:
+        cal = Calendario.objects.filter(**filters)
+        return cal.count()
+    except Exception as e:
+        logger.error(str(e))
 
 ''' Retorna el id del calendario para el día de hoy del usuario recibido por parámetro'''
 def getTodayIdEvent(**kwargs):

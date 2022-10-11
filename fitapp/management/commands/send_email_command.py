@@ -44,14 +44,14 @@ class Command(BaseCommand):
                 if False == self.checkEmail(user['email']):
                     continue
                 if checkNumEventsToday(user_id=user['id']) == 0:
-                    print("no hay eventos para hoy")
+                    logger.warning("no hay eventos para hoy")
                     return False
                 try:
                     event_id, ejercicios = getTodayIdEvent(user_id=user['id'])
+                    logger.error("%s %s" % (event_id, ejercicios))
                     print(event_id)
                 except Exception as e:
-                    logger.error(str(e))
-                    print(e)
+                    logger.critical(str(e))
                 self.sendEmail(
                     username=user['username'],
                     user_id=user['id'],
