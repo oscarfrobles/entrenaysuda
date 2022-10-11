@@ -4,6 +4,9 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 import re
 from fitapp.operaciones import getUsers, checkNumEventsToday, getTodayIdEvent, getLastActiveIdEvent
+import logging
+
+logger = logging.getLogger()
 
 
 
@@ -23,14 +26,15 @@ class Command(BaseCommand):
         print(kwargs)
         if 1 == kwargs.get('test'):
             try:
-                event = getLastActiveIdEvent(user_id=1)
+                event_id, ejercicios = getLastActiveIdEvent(user_id=1)
                 self.sendEmail(
                     username='testing',
                     user_id='1',
                     first_name='name testing',
                     last_name='surname testing',
                     email='juliancamarillo59@gmail.com',
-                    event=event
+                    event=event_id,
+                    ejercicios=ejercicios
                 )
             except Exception as e:
                 print(e)
@@ -40,16 +44,22 @@ class Command(BaseCommand):
                 if False == self.checkEmail(user['email']):
                     continue
                 if checkNumEventsToday(user_id=user['id']) == 0:
-                    print("no hay eventos para hoy")
+                    logger.warning("no hay eventos para hoy")
                     return False
-                event = getTodayIdEvent(user_id=user['id'])
+                try:
+                    event_id, ejercicios = getTodayIdEvent(user_id=user['id'])
+                    logger.error("%s %s" % (event_id, ejercicios))
+                    print(event_id)
+                except Exception as e:
+                    logger.critical(str(e))
                 self.sendEmail(
                     username=user['username'],
                     user_id=user['id'],
                     first_name=user['first_name'],
                     last_name=user['last_name'],
                     email=user['email'],
-                    event=event
+                    event=event_id,
+                    ejericios=ejercicios
                 )
             return str(True)
 
@@ -59,7 +69,8 @@ class Command(BaseCommand):
         first_name = kwargs.get('first_name')
         last_name = kwargs.get('last_name')
         username = kwargs.get('username')
-        event, ejercicios = kwargs.get('event')
+        event = kwargs.get('event')
+        ejercicios = kwargs.get('ejercicios')
         print(ejercicios)
 
         sg = False
