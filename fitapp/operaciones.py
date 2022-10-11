@@ -224,9 +224,9 @@ def getTodayIdEvent(**kwargs):
     user_id = kwargs.get('user_id')
     dt = datetime.datetime.now()
     filters = getDefaultCalendarFilters(user_id=kwargs['user_id'])
-    calendar_id = Calendario.objects.values('id', 'ejercicios').filter(**filters)
+    calendar_id = Calendario.objects.values('id', 'ejercicios__nombre').filter(**filters)
     if calendar_id.count() > 0:
-        result = calendar_id[0]['id']
+        result = (calendar_id[0]['id'],calendar_id[0]['ejercicios__nombre'])
     return result
 
 ''' Retorna el id del calendario para el día de hoy del usuario recibido por parámetro'''
