@@ -13,23 +13,27 @@ class Command(BaseCommand):
         try:
             parser.add_argument(
                 '--test',
-                action='store_true',
+                type=int,
                 help='Executing test',
             )
         except Exception as e:
             print(str(e))
 
     def handle(self, *args, **kwargs):
-        if kwargs.get('test'):
-            event = getLastActiveIdEvent(user_id=1)
-            self.sendEmail(
-                username='testing',
-                user_id='1',
-                first_name='name testing',
-                last_name='surname testing',
-                email='oskijob@gmail.com',
-                event=event
-            )
+        print(kwargs)
+        if 1 == kwargs.get('test'):
+            try:
+                event = getLastActiveIdEvent(user_id=1)
+                self.sendEmail(
+                    username='testing',
+                    user_id='1',
+                    first_name='name testing',
+                    last_name='surname testing',
+                    email='juliancamarillo59@gmail.com',
+                    event=event
+                )
+            except Exception as e:
+                print(e)
         else:
             users = getUsers()
             for user in users:
@@ -47,7 +51,7 @@ class Command(BaseCommand):
                     email=user['email'],
                     event=event
                 )
-            return True
+            return str(True)
 
 
     def sendEmail(self, **kwargs):
@@ -55,7 +59,9 @@ class Command(BaseCommand):
         first_name = kwargs.get('first_name')
         last_name = kwargs.get('last_name')
         username = kwargs.get('username')
-        event = kwargs.get('event')
+        event, ejercicios = kwargs.get('event')
+        print(ejercicios)
+
         sg = False
         home = "https://mimifit.herokuapp.com"
         url = "%s/entrenamientos/%d" % (home, event)
@@ -68,8 +74,9 @@ class Command(BaseCommand):
             html_content='Hola <strong><i>%s</i></strong>. <br/><br/> Tu nuevo reto está en <a href="%s" target="_blank">%s</a>. '
                          'Accede y <strong>termínalo</strong>'
                          '<br/><br/> Si al acceder tienes un error tienes que hacer login de nuevo '
-                         'en <a href="%s" target="_blank">%s</a> y conectarte en login' % (
-                         username, url, url, home, home)
+                         'en <a href="%s" target="_blank">%s</a> y conectarte en login<br/><br/>'
+                         'Debes realizar los siguientes ejericicios %s' % (
+                         username, url, url, home, home, ejercicios)
         )
         try:
             sg = SendGridAPIClient(os.environ.get("SENDGRID_API_KEY"))

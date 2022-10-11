@@ -224,7 +224,7 @@ def getTodayIdEvent(**kwargs):
     user_id = kwargs.get('user_id')
     dt = datetime.datetime.now()
     filters = getDefaultCalendarFilters(user_id=kwargs['user_id'])
-    calendar_id = Calendario.objects.values('id').filter(**filters)
+    calendar_id = Calendario.objects.values('id', 'ejercicios').filter(**filters)
     if calendar_id.count() > 0:
         result = calendar_id[0]['id']
     return result
@@ -238,9 +238,13 @@ def getLastActiveIdEvent(**kwargs):
     filters.pop('fecha')
     filters['activo'] = False
     filters['completado'] = 0
-    calendar_id = Calendario.objects.values('id').filter(**filters).last()
+    try:
+        calendar_id = Calendario.objects.values("id", "ejercicios__nombre").filter(**filters).last()
+    except Exception as e:
+        print(e)
     if str(calendar_id['id']).isnumeric() and None != calendar_id:
-        result = calendar_id['id']
+        print(calendar_id)
+        result = calendar_id['id'], calendar_id['ejercicios__nombre']
     return result
 
 

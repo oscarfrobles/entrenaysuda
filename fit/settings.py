@@ -203,8 +203,8 @@ os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 HOSTNAME = socket.gethostname()
 
 if HOSTNAME == 'MacBook-Air-de-Oscar.local':
-    URL_BASE = 'http://127.0.0.1:8000'
-    REDIRECT_URI = 'http://127.0.0.1:8000/oauth/login/'
+    URL_BASE = 'http://127.0.0.1:9001'
+    REDIRECT_URI = 'http://127.0.0.1:9001/oauth/login/'
 else:
     URL_BASE = 'https://mimifit.herokuapp.com'
     REDIRECT_URI = 'https://mimifit.herokuapp.com/oauth/login/'

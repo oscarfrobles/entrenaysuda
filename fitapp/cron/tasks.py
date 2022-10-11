@@ -12,7 +12,9 @@ env = environ.Env(
 )
 
 def call_send_email_command(**kwargs):
-    return call_command('send_email_command')
+    print(kwargs)
+    test = kwargs.get('test', 0)
+    return call_command('send_email_command', "--test" , test)
 
 
 ''' 
